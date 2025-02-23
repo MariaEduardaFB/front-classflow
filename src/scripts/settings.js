@@ -23,29 +23,46 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (!userInfoDiv) {
       throw new Error('Elemento user-info não encontrado');
     }
-
+  
     userInfoDiv.innerHTML = `
-      <div class="user-profile">
-        <h2>${aluno.nome}</h2>
-        <p>Email: ${aluno.email}</p>
-        <p>Matrícula: ${aluno.matricula}</p>
-        <p>Curso: ${aluno.curso}</p>
-        <button id="editar-info">Editar Informações</button>
+    <div class="user-profile">
+      <h2>${aluno.nome}</h2>
+      <p><strong>Email:</strong> ${aluno.email}</p>
+      <p><strong>Matrícula:</strong> ${aluno.matricula}</p>
+      <p><strong>Curso:</strong> ${aluno.curso}</p>
+      <div class="button-group">
+        <button id="editar-info">Editar dados</button>
+        <button id="excluir-conta" class="delete-btn">Excluir conta</button>
       </div>
-    `;
+    </div>
+  `;
 
-    // Reatribui o event listener ao botão "Editar Informações"
+    // Event listener para edição
     document.getElementById('editar-info').addEventListener('click', (e) => {
       e.preventDefault();
-      // Preenche os campos do modal com os dados atuais
       document.getElementById('edit-nome').value = aluno.nome;
       document.getElementById('edit-email').value = aluno.email;
       document.getElementById('edit-matricula').value = aluno.matricula;
       document.getElementById('edit-curso').value = aluno.curso;
-      document.getElementById('edit-senha').value = ''; // senha sempre iniciada vazia
+      document.getElementById('edit-senha').value = '';
 
       const modal = document.getElementById('edit-modal');
       modal.style.display = 'flex';
+    });
+
+    // Event listener para exclusão
+    document.getElementById('excluir-conta').addEventListener('click', async () => {
+      if (confirm('Tem certeza que deseja excluir sua conta? Essa ação não pode ser desfeita.')) {
+        try {
+          await excluirConta();
+          alert('Conta excluída com sucesso.');
+          localStorage.removeItem('token');
+          window.location.href = './login.html';
+        } catch (error) {
+          console.error('Erro ao excluir conta:', error);
+          alert(`Erro ao excluir conta: ${error.message}`);
+        }
+      }
     });
   }
 
@@ -116,6 +133,24 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (!response.ok) {
       const error = await response.json();
       throw new Error(error.message || 'Erro ao atualizar dados');
+    }
+
+    return await response.json();
+  }
+
+  // Função para excluir conta
+  async function excluirConta() {
+    const response = await fetch('http://localhost:3000/api/alunos/excluir', {
+      method: 'DELETE',
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+    });
+
+    if (!response.ok) {
+      const error = await response.json();
+      throw new Error(error.message || 'Erro ao excluir conta');
     }
 
     return await response.json();

@@ -221,21 +221,47 @@
   #user-info {
     margin-top: 20px;
     padding: 20px;
-    background-color: #f4f4f4;
+    background-color: white;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 40%;
+    
   }
   
   .user-profile {
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .user-profile h2{
+    margin-bottom: 10px;
+    font-size: 25px;
+    color: black;
+    margin-bottom: 10px;
     text-align: center;
+    width: 100%;
   }
   
-  .profile-photo {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-bottom: 10px;
+  .button-group {
+    display: flex;
+    gap: 10px; /* Ajuste o espaçamento entre os botões */
+    width: 100%;
+    
+  }
+  
+  .button-group button {
+    flex: 1; /* Para manter os botões alinhados */
+    padding: 10px 15px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .delete-btn {
+    background-color: red;
+    color: white;
+    width: 100%;
   }
   
   button {
@@ -361,5 +387,19 @@
   
   #salvar:hover {
     background-color: #218838;
+  }
+
+  .delete-btn {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 10px;
+  }
+  
+  .delete-btn:hover {
+    background-color: #cc0000;
   }
   

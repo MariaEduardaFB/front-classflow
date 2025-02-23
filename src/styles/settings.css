@@ -1,0 +1,365 @@
+/* Estilos globais */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  /* Corpo da página */
+  body {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    height: 100vh;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    margin: 0;
+    background-color: #f4f4f4;
+  }
+  
+  /* Menu lateral */
+  #sidebar {
+    width: 250px;
+    background-color: white;
+    color: #8E92BC;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Logo do sistema */
+  #logo-container {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  #logo {
+    width: 200px;
+    height: auto;
+    margin-bottom: 15px;
+  }
+  
+  /* Menu de navegação */
+  nav ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  nav ul li {
+    margin: 10px 0;
+  }
+  
+  nav ul li a {
+    color: #8E92BC;
+    text-decoration: none;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  nav ul li a img {
+    width: 24px;
+    height: 24px;
+    margin-right: 10px;
+  }
+  
+  nav ul li a:hover {
+    background-color: #F5F5F7;
+    color: black;
+    font-weight: bold;
+  }
+  
+  nav ul li a:hover img {
+    filter: brightness(0); /* Deixa o ícone preto */
+  }
+  
+  /* Espaço inferior no menu */
+  nav ul {
+    margin-top: 10px;
+    margin-bottom: 0;
+  }
+  
+  /* Conteúdo principal */
+  #main-content {
+    margin-left: 250px;
+    padding: 20px;
+    width: calc(100% - 250px);
+    overflow-y: auto;
+    background-color: #F4F4F4;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Alinha os elementos horizontalmente */
+  }
+  
+  #imagem-principal {
+    max-width: 100%; /* Garante que a imagem não ultrapasse a largura da tela */
+    height: auto; /* Mantém a proporção original da imagem */
+    display: block; /* Remove o espaço abaixo da imagem */
+    margin: 20px auto; /* Adiciona margem e centraliza a imagem */
+  }
+  
+  /* Título da página */
+  h1 {
+    font-size: 32px;
+    margin-bottom: 10px; /* Ajuste de espaçamento */
+    text-align: center;
+    color: #333;
+  }
+  
+  h2 {
+    font-weight: bold;
+  }
+  
+  h2 p {
+    font-size: 20px;
+    color: black;
+    text-align: center;
+    margin-bottom: 20px;
+    font-weight: bold;
+  }
+  
+  /* Parágrafo abaixo do título */
+  p {
+    font-size: 18px;
+    text-align: center; /* Centraliza o texto */
+    color: #555;
+    margin-bottom: 20px; /* Ajuste de espaçamento */
+  }
+  
+  /* Informações do usuário */
+  #user-info {
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  /* Botões */
+  button {
+    padding: 12px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    background-color: #0C1E33;
+    color: white;
+    border: none;
+    transition: background-color 0.3s, box-shadow 0.3s;
+  }
+  
+  button:hover {
+    background-color: #546FFF;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Formulários */
+  form {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    gap: 15px;
+    margin: 0 auto;
+  }
+  
+  /* Estilos para inputs do formulário */
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  select {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+  }
+  
+  input[type="text"]:focus,
+  input[type="email"]:focus,
+  input[type="password"]:focus,
+  select:focus {
+    border-color: #546FFF;
+    outline: none;
+  }
+  
+  label {
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 5px;
+  }
+  
+  /* Responsividade */
+  @media (max-width: 768px) {
+    #sidebar {
+      width: 200px;
+    }
+  
+    #main-content {
+      margin-left: 200px;
+      width: calc(100% - 200px);
+    }
+  
+    #logo {
+      width: 100px;
+    }
+  
+    nav ul li a {
+      font-size: 16px;
+    }
+  
+    button {
+      width: 100%;
+    }
+  }
+  
+  /* home.css */
+  #user-info {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #f4f4f4;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .user-profile {
+    text-align: center;
+  }
+  
+  .profile-photo {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 10px;
+  }
+  
+  button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    margin: 10px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Estilos do modal */
+  #edit-modal {
+    display: none; /* O modal estará escondido inicialmente */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Fundo escuro semitransparente */
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  #edit-modal input[type="file"] {
+    width: 100%;
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: #f9f9f9;
+  }
+  
+  .modal-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+  }
+  
+  .modal-content input {
+    width: 100%;
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  
+  .modal-buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 10px;
+  }
+  
+  .save-btn,
+  .cancel-btn {
+    background-color: #007BFF;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .cancel-btn {
+    background-color: #dc3545;
+  }
+  
+  .save-btn:hover,
+  .cancel-btn:hover {
+    opacity: 0.9;
+  }
+  
+  .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .modal-header h2 {
+    margin: 0;
+  }
+  
+  .modal-body {
+    margin: 20px 0;
+  }
+  
+  .modal-footer {
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+  .modal-footer button {
+    margin-left: 10px;
+  }
+  
+  #cancelar {
+    background-color: #6c757d;
+    color: #fff;
+  }
+  
+  #cancelar:hover {
+    background-color: #5a6268;
+  }
+  
+  #salvar {
+    background-color: #28a745;
+    color: #fff;
+  }
+  
+  #salvar:hover {
+    background-color: #218838;
+  }
+  

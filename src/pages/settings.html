@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="../scripts/loadMenu.js" defer></script>
+    <script type="module" src="../scripts/settings.js"></script>
+    <link rel="stylesheet" href="../styles/settings.css" />
+    <title>Configurações</title>
+  </head>
+  <body>
+    <div id="sidebar-container"></div>
+
+    <main id="main-content">
+      <h1>Configurações</h1>
+      <p>Aqui você pode gerenciar as configurações da sua conta.</p>
+
+      <div id="user-info">
+        <p>Carregando informações...</p>
+      </div>
+
+      <!-- Modal de Edição -->
+      <div id="edit-modal" class="modal">
+        <div class="modal-content">
+          <h2>Editar Informações</h2>
+          <form id="edit-form">
+            <label for="edit-nome">Nome:</label>
+            <input type="text" id="edit-nome" required />
+
+            <label for="edit-email">Email:</label>
+            <input type="email" id="edit-email" required />
+
+            <label for="edit-matricula">Matrícula:</label>
+            <input type="text" id="edit-matricula" required />
+
+            <label for="edit-senha">Senha:</label>
+            <input type="password" id="edit-senha" required />
+
+            <label for="edit-curso">Curso:</label>
+            <input type="text" id="edit-curso" required />
+
+            <div class="modal-actions">
+              <button type="button" class="cancel-btn">Cancelar</button>
+              <button type="submit" class="save-btn">Salvar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>

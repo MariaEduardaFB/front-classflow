@@ -51,6 +51,57 @@ document.addEventListener("DOMContentLoaded", async () => {
   menuModal.style.display = "none";
   editModal.style.display = "none";
 
+  // Event listener para o formulário de cadastro (adicionado apenas uma vez)
+  formDisciplina.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    const nome = document.getElementById("nome").value.trim();
+    const codigo = document.getElementById("codigo").value.trim();
+    const cargaHoraria = document.getElementById("cargaHoraria").value.trim();
+    const descricao = document.getElementById("descricao").value.trim();
+    const status = document.getElementById("status").value;
+
+    const alunoId = JSON.parse(atob(localStorage.getItem("token").split(".")[1])).id;
+
+    if (!nome || !codigo || !cargaHoraria || !descricao || !status) {
+      alert("Por favor, preencha todos os campos.");
+      return;
+    }
+
+    try {
+      const response = await fetch("http://localhost:3000/api/disciplinas/cadastrar", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          nome,
+          codigo,
+          cargaHoraria,
+          descricao,
+          status,
+          alunoId,
+        }),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        console.error("Erro ao cadastrar disciplina:", errorData);
+        alert(errorData.error || "Erro ao cadastrar disciplina.");
+        return;
+      }
+
+      alert("Disciplina cadastrada com sucesso!");
+      formDisciplina.reset(); // Limpa o formulário
+      modal.style.display = "none"; // Fecha o modal
+      await carregarDisciplinas(); // Atualiza a lista de disciplinas
+    } catch (error) {
+      console.error("Erro na requisição:", error);
+    }
+  });
+
+  // Função para carregar as disciplinas
   async function carregarDisciplinas() {
     try {
       console.log("Fazendo requisição para carregar disciplinas...");
@@ -60,7 +111,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
       if (!response.ok) {
         console.error("Erro na resposta:", response.status, response.statusText);
-        throw new Error("Erro ao carregar disciplinas.");
+        throw new Error("Você ainda não possui nenhuma disciplina.");
       }
 
       disciplinas = await response.json();
@@ -73,56 +124,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         listaDisciplinas.innerHTML = "<p>Nenhuma disciplina cadastrada.</p>";
         return;
       }
-
-      formDisciplina.addEventListener("submit", async (event) => {
-        event.preventDefault();
-    
-        const nome = document.getElementById("nome").value.trim();
-        const codigo = document.getElementById("codigo").value.trim();
-        const cargaHoraria = document.getElementById("cargaHoraria").value.trim();
-        const descricao = document.getElementById("descricao").value.trim();
-        const status = document.getElementById("status").value;
-    
-        const alunoId = JSON.parse(atob(localStorage.getItem("token").split(".")[1])).id;
-    
-        if (!nome || !codigo || !cargaHoraria || !descricao || !status) {
-          alert("Por favor, preencha todos os campos.");
-          return;
-        }
-    
-        try {
-          const response = await fetch("http://localhost:3000/api/disciplinas/cadastrar", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${token}`,
-            },
-            body: JSON.stringify({
-              nome,
-              codigo,
-              cargaHoraria,
-              descricao,
-              status,
-              alunoId,
-            }),
-          });
-    
-          if (!response.ok) {
-            const errorData = await response.json();
-            console.error("Erro ao cadastrar disciplina:", errorData);
-            alert(errorData.error || "Erro ao cadastrar disciplina.");
-            return;
-          }
-    
-          alert("Disciplina cadastrada com sucesso!");
-          carregarDisciplinas();
-          formDisciplina.reset();
-          modal.style.display = "none";
-        } catch (error) {
-          console.error("Erro na requisição:", error);
-        }
-      });
-    
 
       disciplinas.forEach((disciplina) => {
         console.log("Renderizando disciplina:", disciplina);
@@ -163,6 +164,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         listaDisciplinas.appendChild(li);
       });
 
+      // Adiciona event listeners para os ícones de opções
       document.querySelectorAll(".options-icon").forEach((icon) => {
         icon.addEventListener("click", (event) => {
           event.stopPropagation();
@@ -225,11 +227,13 @@ document.addEventListener("DOMContentLoaded", async () => {
   // Fechar o modal de edição
   document.getElementById("closeEditModal").addEventListener("click", () => {
     editModal.style.display = "none";
+    disciplinaSelecionada = null; // Reseta o estado
   });
 
   // Cancelar a edição
   document.getElementById("cancelEdit").addEventListener("click", () => {
     editModal.style.display = "none";
+    disciplinaSelecionada = null; // Reseta o estado
   });
 
   // Salvar a edição
@@ -267,7 +271,8 @@ document.addEventListener("DOMContentLoaded", async () => {
   
       alert("Disciplina editada com sucesso!");
       editModal.style.display = "none";
-      carregarDisciplinas(); // Recarrega a lista de disciplinas após a edição
+      disciplinaSelecionada = null; // Reseta o estado
+      await carregarDisciplinas(); // Atualiza a lista de disciplinas
     } catch (error) {
       console.error("Erro ao editar disciplina:", error);
       alert("Erro ao editar disciplina.");
@@ -283,21 +288,6 @@ document.getElementById("btnExcluir").addEventListener("click", async () => {
   // Esconde o menu de opções quando clicar no botão de excluir
   menuModal.style.display = "none"; // Isso oculta o menu de opções
 
-  // Função para mostrar o alerta customizado
-  function showCustomAlert(message) {
-    const alertBox = document.getElementById("customAlert");
-    const alertMessage = document.getElementById("alertMessage");
-    
-    alertMessage.textContent = message; // Atualiza a mensagem do alerta
-    alertBox.style.display = "flex"; // Exibe o alerta
-  
-    // Fechar o alerta quando clicar no botão de fechar
-    const closeAlertButton = document.getElementById("closeAlert");
-    closeAlertButton.addEventListener("click", () => {
-      alertBox.style.display = "none"; // Fecha o alerta
-    });
-  }
-
   // Ação de exclusão ao confirmar
   document.getElementById("confirmDelete").addEventListener("click", async () => {
     try {
@@ -308,19 +298,20 @@ document.getElementById("btnExcluir").addEventListener("click", async () => {
 
       if (!response.ok) throw new Error("Erro ao excluir disciplina.");
 
-      showCustomAlert("Disciplina excluída!");
-      carregarDisciplinas();
+      alert("Disciplina excluída com sucesso!"); // Usa o alert nativo
+      disciplinaSelecionada = null; // Reseta o estado
+      confirmModal.style.display = "none"; // Fecha o modal
+      await carregarDisciplinas(); // Atualiza a lista de disciplinas
     } catch (error) {
       console.error("Erro ao excluir disciplina:", error);
+      alert("Erro ao excluir disciplina.");
     }
-
-    // Fecha o modal após a ação
-    confirmModal.style.display = "none";
   });
 
   // Fecha o modal se clicar em "Não"
   document.getElementById("cancelDelete").addEventListener("click", () => {
     confirmModal.style.display = "none"; // Fecha o modal
+    disciplinaSelecionada = null; // Reseta o estado
   });
 
   // Fechar o modal se clicar fora dele
@@ -328,6 +319,7 @@ document.getElementById("btnExcluir").addEventListener("click", async () => {
     // Verifica se o clique foi fora do modal
     if (confirmModal.style.display === "flex" && !confirmModal.contains(event.target) && event.target !== document.getElementById("btnExcluir")) {
       confirmModal.style.display = "none"; // Fecha o modal se o clique for fora dele
+      disciplinaSelecionada = null; // Reseta o estado
     }
   });
 });
@@ -349,5 +341,6 @@ document.getElementById("btnExcluir").addEventListener("click", async () => {
     });
   });
 
+  // Carregar as disciplinas ao iniciar a página
   carregarDisciplinas();
 });

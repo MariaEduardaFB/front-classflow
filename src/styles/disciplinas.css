@@ -106,6 +106,7 @@ nav ul li a:hover img {
   flex-direction: column;
   align-items: start; /* Centraliza o conteúdo */
   font-size: large;
+  margin-left: 120px;
 }
 
 /* Header de disciplinas (botão e filtro) */
@@ -225,11 +226,11 @@ nav ul li a:hover img {
 }
 
 .modal-content {
-  background-color: #fefefe;
+  background-color: red;
   margin: 15% auto;
   padding: 20px;
   border: 1px solid #888;
-  width: 80%; /* Tamanho do modal */
+  width: 100px; /* Tamanho do modal */
 }
 
 .close {
@@ -245,6 +246,606 @@ nav ul li a:hover img {
   text-decoration: none;
   cursor: pointer;
 }
+
+.disciplina-content {
+  position: relative; /* Define o contexto de posicionamento para os elementos filhos */
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  background-color: white;
+  border-radius: 5px;
+  
+  margin-bottom: 10px;
+}
+
+.disciplina-options {
+  position: absolute; /* Posiciona o ícone absolutamente dentro da div */
+  top: 10px; /* Distância do topo */
+  right: 10px; /* Distância da direita */
+  cursor: pointer; /* Muda o cursor para indicar que é clicável */
+}
+
+.options-icon {
+  width: 24px; /* Tamanho do ícone */
+  height: 24px;
+}
+
+.disciplina-status {
+  position: absolute; /* Posiciona o status absolutamente dentro da div */
+  bottom: 10px; /* Distância do fundo */
+  right: 10px; /* Distância da direita */
+  padding: 5px 10px;
+  border-radius: 15px;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.status-pendente {
+  background-color: #FF0000;
+  color: white;
+}
+
+.status-andamento {
+  background-color: #FFB554;
+  color: white;
+}
+
+.status-concluida {
+  background-color: #0BA200;
+  color: white;
+}
+
+.disciplina-info {
+  display: flex;
+  flex-direction: column; /* Organiza os elementos em uma coluna */
+  gap: 5px; /* Espaçamento entre os elementos */
+}
+
+.disciplina-nome {
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.disciplina-codigo {
+  font-size: 20px;
+  color: #666;
+}
+
+.disciplina-carga {
+  font-size: 20px;
+  color: #666;
+}
+
+.disciplina-content {
+  position: relative; /* Para permitir posicionamento absoluto dos filhos */
+  padding-left: 50px; /* Garante espaço para o ícone */
+}
+
+.disciplina-icon {
+  position: absolute;
+  top: 10px; /* Ajuste conforme necessário */
+  left: 10px; /* Ajuste conforme necessário */
+  width: 25px; /* Ajuste conforme necessário */
+  height: auto;
+}
+
+.menu-modal {
+  display: none; /* Inicialmente escondido */
+  position: absolute; /* Posicionamento absoluto */
+  background-color: white; /* Fundo branco */
+  border: 1px solid #ccc; /* Borda sutil */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra */
+  z-index: 1000; /* Garante que fique acima de outros elementos */
+  padding: 10px; /* Espaçamento interno */
+  border-radius: 5px; /* Bordas arredondadas */
+}
+
+.menu-modal button {
+  display: block; /* Cada botão em uma linha */
+  width: 100%; /* Largura total */
+  padding: 8px 12px; /* Espaçamento interno */
+  text-align: left; /* Alinhamento do texto */
+  font-weight: bold;
+  border: none; /* Remove borda */
+  background-color: transparent; /* Fundo transparente */
+  cursor: pointer; /* Cursor de ponteiro */
+}
+
+.menu-modal button:hover {
+  background-color: #f5f5f5; /* Efeito hover */
+}
+
+/* Estilização do fundo do modal */
+#deleteModal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* Conteúdo do modal */
+.modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  width: 35%;
+  text-align: center;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Título do modal */
+.modal-header {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+/* Texto dentro do modal */
+.modal-body {
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 20px;
+
+}
+
+/* Área dos botões */
+.modal-footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+/* Botão de cancelar */
+#cancelDelete {
+  background: #f3f4f6;
+  color: #333;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+#cancelDelete:hover {
+  background: #e5e7eb;
+}
+
+/* Botão de confirmar exclusão */
+#confirmDelete {
+  background: #dc2626;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+#confirmDelete:hover {
+  background: #b91c1c;
+}
+
+.modal-content h2{
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+  
+}
+
+#formDisciplina hr {
+  border: 0;
+  border-top: 2px solid #ccc; /* Cor e espessura da linha */
+  margin: 16px 0; /* Espaçamento acima e abaixo da linha */
+}
+
+/* Estilização do Formulário */
+#formDisciplina {
+  display: flex;
+  flex-direction: column;
+  
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 10px;
+  background-color: #fff;
+  border-radius: 12px;
+}
+
+/* Labels do Formulário */
+#formDisciplina label {
+  font-weight: 600;
+  font-size: 16px;
+  color: black;
+  margin-bottom: 8px;
+  margin-top: 4px;
+  text-align: left; /* Alinha os labels à esquerda */
+}
+
+/* Inputs e Select do Formulário */
+#formDisciplina input,
+#formDisciplina select {
+  padding: 10px;
+  font-size: 14px;
+  border: 1.5px solid black;
+  border-radius: 8px;
+  outline: none;
+  transition: all 0.3s ease;
+  width: 100%; /* Garante que os inputs ocupem toda a largura do contêiner */
+}
+
+/* Foco nos Inputs */
+#formDisciplina input:focus,
+#formDisciplina select:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 6px rgba(0, 123, 255, 0.2);
+}
+
+/* Botão de Cadastro */
+#formDisciplina button[type="submit"] {
+  padding: 12px;
+  background-color: #007bff;
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 2rem;
+  width: 48%; /* Largura dos botões */
+  display: block;
+  height: 45px; /* Definindo a altura para os botões */
+}
+
+/* Botões no Formulário */
+#formDisciplina .button-container {
+  display: flex;
+  justify-content: center; /* Centraliza os botões */
+  gap: 16px; /* Espaçamento entre os botões */
+  margin-top: 1rem; /* Espaço superior entre os botões e o campo anterior */
+}
+
+/* Efeito Hover no Botão */
+#formDisciplina button[type="submit"]:hover {
+  background-color: #0056b3;
+}
+
+/* Estilo para o botão de cancelar */
+#formDisciplina .button-container {
+  display: flex;
+  justify-content: center; /* Centraliza os botões horizontalmente */
+  gap: 16px; /* Espaçamento entre os botões */
+  margin-top: 2rem; /* Espaço superior entre os botões e o campo anterior */
+  align-items: center; /* Faz os botões terem a mesma altura */
+}
+
+/* Botão de Cadastro */
+#formDisciplina button[type="submit"] {
+  padding: 12px;
+  background-color: #0BA200;
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 48%; /* Largura dos botões */
+  height: 45px; /* Garantindo que a altura é a mesma */
+  display: flex;
+  align-items: center; /* Centraliza verticalmente o texto */
+  justify-content: center; /* Centraliza o texto horizontalmente */
+}
+
+/* Botão de Cancelar */
+#formDisciplina button[type="button"] {
+  padding: 12px;
+  background-color: white;
+  color: red;
+  font-size: 14px;
+  font-weight: 600;
+  border: 1px solid;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 2rem;
+  width: 48%; /* Largura dos botões */
+  height: 45px;  /* Garantindo que a altura é a mesma */
+  display: flex;
+  align-items: center; /* Centraliza verticalmente o texto */
+  justify-content: center; /* Centraliza o texto horizontalmente */
+}
+
+/* Efeito Hover nos botões */
+#formDisciplina button[type="submit"]:hover {
+  background-color: #098800;
+}
+
+#formDisciplina button[type="button"]:hover {
+  background-color: rgb(255, 208, 208);
+}
+
+/* Estilo para o contêiner dos campos lado a lado */
+.form-row {
+  display: flex;
+  gap: 16px; /* Ajusta o espaçamento entre os campos */
+  margin-bottom: 16px; /* Espaço abaixo do contêiner */
+}
+
+/* Estilo para cada campo dentro do contêiner */
+.form-group {
+  flex: 1; /* Faz os inputs ocuparem o mesmo espaço */
+}
+
+/* Estilo para inputs dentro do contêiner lado a lado */
+.form-group input {
+  width: 100%; /* Garante que os inputs ocupem toda a largura do seu contêiner */
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  margin-bottom: 12px;
+}
+
+/* Alinha o label à esquerda */
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  text-align: left; /* Alinha os labels à esquerda */
+}
+
+/* Estilo para o campo 'Nome' e 'Código' lado a lado */
+#nome, #codigo {
+  width: calc(50% - 8px); /* Faz os campos ficarem lado a lado com espaçamento */
+}
+
+
+/* Estilo do botão de fechar */
+.close-btn {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 18px;
+  cursor: pointer;
+  font-weight: bold;
+  padding: 5px 10px;
+}
+
+/* Efeito hover no botão de fechar */
+.close-btn:hover {
+  color: #f8f9fa;
+}
+
+/* Estilo do Modal */
+#editModal {
+  display: none; /* Inicialmente escondido */
+  position: fixed;
+  z-index: 1000; /* Garante que fique acima de outros elementos */
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5); /* Fundo escuro semi-transparente */ /* Efeito de desfoque */
+}
+
+/* Conteúdo do Modal */
+#editModal .modal-content {
+  background-color: white;
+  margin: 5% auto; /* Centraliza verticalmente */
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  width: 100%; /* Ajusta o tamanho ao conteúdo */
+  height: 85%; /* Altura automática */
+  max-width: 500px; /* Largura máxima */
+  animation: fadeIn 0.3s ease-in-out; /* Animação de entrada */
+}
+
+/* Título do Modal */
+#editModal h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Botão de fechar */
+#editModal .close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+#editModal .close:hover,
+#editModal .close:focus {
+  color: black;
+}
+
+/* Formulário dentro do Modal */
+#formEditDisciplina {
+  display: flex;
+  flex-direction: column;
+  gap: 16px; /* Espaçamento entre os campos */
+}
+
+#formEditDisciplina hr {
+  border: 0;
+  border-top: 2px solid #ccc; /* Cor e espessura da linha */
+  margin: 16px 16px;
+  margin-bottom: 10px; /* Espaçamento acima e abaixo da linha */
+}
+
+/* Campos do Formulário */
+#formEditDisciplina .form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 2px; /* Espaçamento entre label e input */
+}
+
+#formEditDisciplina label {
+  font-weight: 600;
+  font-size: 16px;
+  color: black;
+}
+
+#formEditDisciplina input,
+#formEditDisciplina select {
+  padding: 10px;
+  font-size: 14px;
+  border: 1.5px solid black;
+  border-radius: 8px;
+  outline: none;
+  transition: all 0.3s ease;
+  width: 100%;
+}
+
+#formEditDisciplina input:focus,
+#formEditDisciplina select:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 6px rgba(0, 123, 255, 0.2);
+}
+
+/* Botões do Formulário */
+#formEditDisciplina .button-container {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 20px;
+}
+
+#formEditDisciplina button[type="submit"],
+#formEditDisciplina button[type="button"] {
+  padding: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 48%;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#formEditDisciplina button[type="submit"] {
+  background-color: #0BA200;
+  color: white;
+}
+
+#formEditDisciplina button[type="submit"]:hover {
+  background-color: #098800;
+}
+
+#formEditDisciplina button[type="button"] {
+  background-color: white;
+  color: red;
+  border: 1px solid red;
+}
+
+#formEditDisciplina button[type="button"]:hover {
+  background-color: rgb(255, 208, 208);
+}
+
+/* Estilo do modal de confirmação */
+#confirmModal {
+  display: none; /* Inicialmente escondido */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Fundo escuro semi-transparente */
+  z-index: 1000; /* Garante que fique acima de outros elementos */
+  justify-content: center;
+  align-items: center;
+}
+
+/* Conteúdo do modal */
+#confirmModal .modal-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  width: 300px; /* Largura fixa */
+  text-align: center;
+}
+
+/* Estilo do texto */
+#confirmModal p {
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+/* Estilo da linha horizontal */
+#confirmModal hr {
+  border: 0;
+  border-top: 1px solid #ccc; /* Cor e espessura da linha */
+  margin: 15px 0; /* Espaçamento acima e abaixo da linha */
+}
+
+/* Container dos botões */
+#confirmModal .modal-buttons {
+  display: flex;
+  justify-content: space-between; /* Espaçamento entre os botões */
+  gap: 10px; /* Espaçamento entre os botões */
+}
+
+/* Estilo dos botões */
+#confirmModal .modal-buttons button {
+  flex: 1; /* Faz os botões ocuparem o mesmo espaço */
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+/* Botão "Sim" */
+#confirmModal #confirmDelete {
+  background-color: red; /* Vermelho */
+  color: white;
+}
+
+#confirmModal #confirmDelete:hover {
+  background-color: #c82333; /* Vermelho mais escuro no hover */
+}
+
+/* Botão "Não" */
+#confirmModal #cancelDelete {
+  background-color: white; /* Cinza */
+  color: black;
+  border: 1px solid black;}
+
+
+
+/* Animação de fade-in */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+
+
+
 
 /* Responsividade */
 @media (max-width: 768px) {

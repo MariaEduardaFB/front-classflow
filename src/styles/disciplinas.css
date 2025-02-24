@@ -29,6 +29,11 @@ body {
   display: flex;
   flex-direction: column;
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  justify-content: space-between; /* Garante que o menu e o logout fiquem alinhados */
+}
+
+nav {
+  flex-grow: 1; /* Expande a navegação e empurra o botão para baixo */
 }
 
 /* Logo do sistema */
@@ -76,6 +81,34 @@ nav ul li a:hover {
 
 nav ul li a:hover img {
   filter: brightness(0);
+}
+
+#logout-container {
+  padding: 15px;
+  text-align: center;
+}
+
+#logout-btn {
+  width: 100%;
+  padding: 10px;
+  background-color: transparent; /* Cor de destaque para o logout */
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+#logout-btn img {
+  width: 24px;
+  height: 24px;
+}
+
+#logout-btn:hover {
+  background-color: #e04343;
 }
 
 /* Conteúdo principal */

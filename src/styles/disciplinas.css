@@ -29,11 +29,6 @@ body {
   display: flex;
   flex-direction: column;
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-  justify-content: space-between; /* Garante que o menu e o logout fiquem alinhados */
-}
-
-nav {
-  flex-grow: 1; /* Expande a navegação e empurra o botão para baixo */
 }
 
 /* Logo do sistema */
@@ -81,34 +76,6 @@ nav ul li a:hover {
 
 nav ul li a:hover img {
   filter: brightness(0);
-}
-
-#logout-container {
-  padding: 15px;
-  text-align: center;
-}
-
-#logout-btn {
-  width: 100%;
-  padding: 10px;
-  background-color: transparent; /* Cor de destaque para o logout */
-  color: white;
-  border: none;
-  cursor: pointer;
-  border-radius: 5px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-}
-
-#logout-btn img {
-  width: 24px;
-  height: 24px;
-}
-
-#logout-btn:hover {
-  background-color: #e04343;
 }
 
 /* Conteúdo principal */
@@ -663,7 +630,7 @@ nav ul li a:hover img {
   width: 100%;
   height: 100%;
   overflow: auto;
-  background-color: rgba(0, 0, 0, 0.5); /* Fundo escuro semi-transparente */ /* Efeito de desfoque */
+  background-color: rgba(0, 0, 0, 0.5); /* Fundo escuro semi-transparente / / Efeito de desfoque */
 }
 
 /* Conteúdo do Modal */
@@ -876,7 +843,186 @@ nav ul li a:hover img {
   }
 }
 
+/* Estilos para o alerta personalizado */
+#customAlert {
+  display: none; /* Inicialmente escondido */
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  color: white;
+  padding: 15px 25px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 1000; /* Garante que fique acima de outros elementos */
+  animation: slideIn 0.5s ease-out; /* Animação de entrada */
+}
 
+/* Estilo para alertas de sucesso (verde) */
+#customAlert.success {
+  background-color: #4CAF50; /* Verde para sucesso */
+}
+
+/* Estilo para alertas de erro (vermelho) */
+#customAlert.error {
+  background-color: #f44336; /* Vermelho para erro */
+}
+
+/* Conteúdo do Alerta */
+#customAlert .alert-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+}
+
+/* Botão de Fechar */
+#closeAlert {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  padding: 5px;
+  border-radius: 50%;
+  transition: background-color 0.3s ease;
+}
+
+#closeAlert:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.custom-alert.error {
+  background-color: #f44336; /* Vermelho para erro */
+}
+
+.custom-alert.warning {
+  background-color: #ff9800; /* Laranja para aviso */
+}
+
+.custom-alert .alert-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+}
+
+.custom-alert #alertMessage {
+  font-size: 16px;
+}
+
+.custom-alert #closeAlert {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  padding: 5px;
+  border-radius: 50%;
+  transition: background-color 0.3s ease;
+}
+
+.custom-alert #closeAlert:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Estilos para o modal de confirmação */
+#confirmSaveModal {
+  display: none; /* Inicialmente escondido */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Fundo escuro semi-transparente */
+  z-index: 1000; /* Garante que fique acima de outros elementos */
+  justify-content: center;
+  align-items: center;
+}
+
+#confirmSaveModal .modal-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  width: 300px; /* Largura fixa */
+  text-align: center;
+}
+
+#confirmSaveModal p {
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+#confirmSaveModal hr {
+  border: 0;
+  border-top: 1px solid #ccc; /* Linha horizontal */
+  margin: 15px 0;
+}
+
+#confirmSaveModal .modal-buttons {
+  display: flex;
+  justify-content: space-between; /* Espaçamento entre os botões */
+  gap: 10px; /* Espaçamento entre os botões */
+}
+
+#confirmSaveModal .modal-buttons button {
+  flex: 1; /* Faz os botões ocuparem o mesmo espaço */
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+/* Botão "Sim" */
+#confirmSaveModal #confirmSave {
+  background-color: #4CAF50; /* Verde */
+  color: white;
+}
+
+#confirmSaveModal #confirmSave:hover {
+  background-color: #45a049; /* Verde mais escuro no hover */
+}
+
+/* Botão "Não" */
+#confirmSaveModal #cancelSave {
+  background-color: #f44336; /* Vermelho */
+  color: white;
+}
+
+#confirmSaveModal #cancelSave:hover {
+  background-color: #e53935; /* Vermelho mais escuro no hover */
+}
+
+
+
+/* Animação de entrada */
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Animação de saída */
+@keyframes slideOut {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
 
 
 
@@ -902,4 +1048,5 @@ nav ul li a:hover img {
   button {
     width: 100%;
   }
+
 }

@@ -7,6 +7,50 @@ document.addEventListener("DOMContentLoaded", async () => {
     return;
   }
 
+  // Função para exibir alertas personalizados
+  function showCustomAlert(message, type = "success") {
+    const customAlert = document.getElementById("customAlert");
+    const alertMessage = document.getElementById("alertMessage");
+
+    alertMessage.textContent = message;
+    customAlert.className = `custom-alert ${type}`;
+    customAlert.style.display = "flex";
+
+    setTimeout(() => {
+      customAlert.style.display = "none";
+    }, 3000);
+
+    document.getElementById("closeAlert").addEventListener("click", () => {
+      customAlert.style.display = "none";
+    });
+  }
+
+  function showConfirmSaveModal(onConfirm, onCancel) {
+    const confirmSaveModal = document.getElementById("confirmSaveModal");
+    confirmSaveModal.style.display = "flex"; // Exibe o modal
+  
+    // Configura o botão "Sim"
+    document.getElementById("confirmSave").onclick = () => {
+      confirmSaveModal.style.display = "none"; // Fecha o modal
+      if (onConfirm) onConfirm(); // Executa a função de confirmação
+      showCustomAlert("Disciplina cadastrada com sucesso!", "success"); // Mensagem de sucesso (verde)
+    };
+  
+    // Configura o botão "Não"
+    document.getElementById("cancelSave").onclick = () => {
+      confirmSaveModal.style.display = "none"; // Fecha o modal
+      if (onCancel) onCancel(); // Executa a função de cancelamento
+      showCustomAlert("Disciplina não cadastrada.", "error"); // Mensagem de erro (vermelho)
+    };
+  
+    // Fecha o modal se clicar fora dele
+    document.addEventListener("click", (event) => {
+      if (confirmSaveModal.style.display === "flex" && !confirmSaveModal.contains(event.target)) {
+        confirmSaveModal.style.display = "none"; // Fecha o modal
+      }
+    });
+  }
+
   // Carregar o nome do usuário
   try {
     const response = await fetch("http://localhost:3000/api/alunos/perfil", {
@@ -64,41 +108,47 @@ document.addEventListener("DOMContentLoaded", async () => {
     const alunoId = JSON.parse(atob(localStorage.getItem("token").split(".")[1])).id;
 
     if (!nome || !codigo || !cargaHoraria || !descricao || !status) {
-      alert("Por favor, preencha todos os campos.");
+      showCustomAlert("Por favor, preencha todos os campos.", "error"); // ADICIONADO
       return;
     }
 
-    try {
-      const response = await fetch("http://localhost:3000/api/disciplinas/cadastrar", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({
-          nome,
-          codigo,
-          cargaHoraria,
-          descricao,
-          status,
-          alunoId,
-        }),
-      });
+    // Exibe o modal de confirmação personalizado
+    showConfirmSaveModal(async () => {
+      try {
+        const response = await fetch("http://localhost:3000/api/disciplinas/cadastrar", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            nome,
+            codigo,
+            cargaHoraria,
+            descricao,
+            status,
+            alunoId,
+          }),
+        });
 
-      if (!response.ok) {
-        const errorData = await response.json();
-        console.error("Erro ao cadastrar disciplina:", errorData);
-        alert(errorData.error || "Erro ao cadastrar disciplina.");
-        return;
+        if (!response.ok) {
+          const errorData = await response.json();
+          console.error("Erro ao cadastrar disciplina:", errorData);
+          showCustomAlert(errorData.error || "Erro ao cadastrar disciplina.", "error"); // ADICIONADO
+          return;
+        }
+
+        showCustomAlert("Disciplina cadastrada com sucesso!", "success"); // ADICIONADO
+        formDisciplina.reset(); // Limpa o formulário
+        modal.style.display = "none"; // Fecha o modal
+        await carregarDisciplinas(); // Atualiza a lista de disciplinas
+      } catch (error) {
+        console.error("Erro na requisição:", error);
+        showCustomAlert("Erro ao cadastrar disciplina.", "error"); // ADICIONADO
       }
-
-      alert("Disciplina cadastrada com sucesso!");
-      formDisciplina.reset(); // Limpa o formulário
-      modal.style.display = "none"; // Fecha o modal
-      await carregarDisciplinas(); // Atualiza a lista de disciplinas
-    } catch (error) {
-      console.error("Erro na requisição:", error);
-    }
+    }, () => {
+      showCustomAlert("Cadastro não realizado.", "warning"); // ADICIONADO: Ação ao cancelar
+    });
   });
 
   // Função para carregar as disciplinas
@@ -181,7 +231,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       });
     } catch (error) {
       console.error("Erro ao carregar disciplinas:", error);
-      listaDisciplinas.innerHTML = "<p>Erro ao carregar disciplinas. Tente novamente mais tarde.</p>";
+      listaDisciplinas.innerHTML = "<p>Cadastre suas disciplinas para visualia-las aqui.</p>";
     }
   }
 

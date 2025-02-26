@@ -1,15 +1,151 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="../scripts/loadMenu.js" defer></script>
-    <link rel="stylesheet" href="../styles/settings.css">
-    <link rel="stylesheet" href="../styles/disciplinas.css">
-    <title>Projetos</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projetos</title>
+  <script src="../scripts/loadMenu.js" defer></script>
+  <link rel="stylesheet" href="../styles/projetos.css">
 </head>
 <body>
-    <div id="sidebar-container"></div>
-    
+  <div id="sidebar-container"></div>
+  
+  <header id="main-content">
+    <h1>Projetos</h1>
+  </header>
+
+  <main>
+    <div id="projetosContainer">
+      <h2>Meus Projetos</h2>
+      <div class="projetos-header">
+        <button id="btnAbrirModal">+ Adicionar Projeto</button>
+        <div class="filtro-container">
+          <div class="filtro-com-icone" onclick="abrirSelect()">
+            <img src="../assets/icons/sort.png" alt="Ícone de ordenação" class="filtro-icone">
+            <span class="filtro-texto">Ordenar por:</span>
+            <select id="filtro">
+              <option value="todos">Todos</option>
+              <option value="Em Andamento">Em andamento</option>
+              <option value="Concluído">Concluído</option>
+              <option value="Pendente">Pendente</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <ul id="listaProjetos"></ul>
+    </div>
+  </main>
+
+  <!-- Modal de Cadastro de Projeto -->
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>Cadastrar Novo Projeto</h2>
+      <hr>
+      <form id="formProjeto">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="titulo">Título do Projeto:</label>
+            <input type="text" id="titulo" required>
+          </div>
+          <div class="form-group">
+            <label for="descricao">Descrição:</label>
+            <input type="text" id="descricao" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+            <label for="notas">nota:</label>
+            <input type="text" id="notas" required>
+          </div>
+      
+        <!-- Campo para upload de arquivo -->
+        <div class="form-group">
+          <label for="arquivo">Upload de Arquivo:</label>
+          <input type="file" id="arquivo" name="arquivo" accept=".jpg, .jpeg, .png, .pdf" />
+        </div>
+      
+        <label for="status">Status:</label>
+        <select id="status">
+          <option value="Em Andamento">Em Andamento</option>
+          <option value="Concluído">Concluído</option>
+          <option value="Pendente">Pendente</option>
+        </select>
+      
+        <div class="button-container">
+          <button type="submit">Cadastrar</button>
+          <button type="button" id="cancelarBtn">Cancelar</button>
+        </div>
+      </form>
+      
+    </div>
+  </div>
+
+  <!-- Modal de Opções -->
+  <div id="menuModal" class="menu-modal">
+    <button id="btnEditar">Editar</button>
+    <button id="btnExcluir">Excluir</button>
+  </div>
+
+  <!-- Modal de Edição de Projeto -->
+  <div id="editModal" style="display:none;">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <form id="formEditProjeto" enctype="multipart/form-data">
+            <label for="editTitulo">Título</label>
+            <input type="text" id="editTitulo" required>
+            
+            <label for="editDescricao">Descrição</label>
+            <input type="text" id="editDescricao" required>
+            
+            <label for="editStatus">Status</label>
+            <select id="editStatus" required>
+                <option value="Pendente">Pendente</option>
+                <option value="Em Andamento">Em Andamento</option>
+                <option value="Concluído">Concluído</option>
+            </select>
+            
+            <label for="editArquivo">Arquivo</label>
+            <input type="file" id="editArquivo">
+            
+            <button type="submit">Salvar</button>
+        </form>
+    </div>
+</div>
+
+
+  <!-- Modal de Confirmação -->
+  <div id="confirmModal" class="modal">
+    <div class="modal-content">
+      <p>Deseja excluir o projeto?</p>
+      <hr>
+      <div class="modal-buttons">
+        <button id="confirmDelete">Sim</button>
+        <button id="cancelDelete">Não</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal de Confirmação de Salvamento -->
+  <div id="confirmSaveModal" class="modal">
+    <div class="modal-content">
+      <p>Tem certeza que deseja salvar esse projeto?</p>
+      <hr>
+      <div class="modal-buttons">
+        <button id="confirmSave">Sim</button>
+        <button id="cancelSave">Não</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Alerta Personalizado -->
+  <div id="customAlert" class="custom-alert">
+    <div class="alert-content">
+      <span id="alertMessage"></span>
+      <button id="closeAlert">&times;</button>
+    </div>
+  </div>
+
+  <script src="../scripts/projetos.js" defer></script>
 </body>
 </html>

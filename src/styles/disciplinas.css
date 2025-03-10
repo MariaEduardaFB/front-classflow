@@ -98,7 +98,7 @@ nav ul li a:hover img {
 }
 
 /* Container das disciplinas */
-#projetosContainer {
+#disciplinasContainer {
   width: 100%;
   max-width: 900px;
   margin-top: 20px; /* Espaço entre o cabeçalho e o conteúdo */

@@ -498,7 +498,7 @@ textarea:focus {
   }
   
   /* Container das s */
-  #projetoContainer {
+  #projetosContainer {
     width: 100%;
     max-width: 900px;
     margin-top: 20px; /* Espaço entre o cabeçalho e o conteúdo */
@@ -612,19 +612,21 @@ textarea:focus {
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     
+    
   }
   
   /* Modal */
   .modal {
     display: none; /* Modal começa escondido */
     position: fixed;
-    z-index: 1; /* Fica acima do conteúdo */
+    z-index: 1000; /* Fica acima do conteúdo */
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
     overflow: auto;
     background-color: rgba(0, 0, 0, 0.4); /* Fundo transparente */
+
   }
   
   .modal-content {
@@ -633,6 +635,7 @@ textarea:focus {
     padding: 20px;
     border: 1px solid #888;
     width: 100px; /* Tamanho do modal */
+   
   }
   
   .close {
@@ -780,6 +783,7 @@ textarea:focus {
     width: 35%;
     text-align: center;
     animation: fadeIn 0.3s ease-in-out;
+    height: 79%;
   }
   
   /* Título do modal */
@@ -841,14 +845,14 @@ textarea:focus {
     
   }
   
-  #form hr {
+  #formProjeto hr {
     border: 0;
     border-top: 2px solid #ccc; /* Cor e espessura da linha */
     margin: 16px 0; /* Espaçamento acima e abaixo da linha */
   }
   
   /* Estilização do Formulário */
-  #form {
+  #formProjeto {
     display: flex;
     flex-direction: column;
     
@@ -860,7 +864,7 @@ textarea:focus {
   }
   
   /* Labels do Formulário */
-  #form label {
+  #formProjeto label {
     font-weight: 600;
     font-size: 16px;
     color: black;
@@ -870,8 +874,8 @@ textarea:focus {
   }
   
   /* Inputs e Select do Formulário */
-  #form input,
-  #form select {
+  #formProjeto input,
+  #formProjeto select {
     padding: 10px;
     font-size: 14px;
     border: 1.5px solid black;
@@ -882,14 +886,14 @@ textarea:focus {
   }
   
   /* Foco nos Inputs */
-  #form input:focus,
-  #form select:focus {
+  #formProjeto input:focus,
+  #formProjeto select:focus {
     border-color: #007bff;
     box-shadow: 0 0 6px rgba(0, 123, 255, 0.2);
   }
   
   /* Botão de Cadastro */
-  #form button[type="submit"] {
+  #formProjeto button[type="submit"] {
     padding: 12px;
     background-color: #007bff;
     color: white;
@@ -906,7 +910,7 @@ textarea:focus {
   }
   
   /* Botões no Formulário */
-  #form .button-container {
+  #formProjeto .button-container {
     display: flex;
     justify-content: center; /* Centraliza os botões */
     gap: 16px; /* Espaçamento entre os botões */
@@ -914,12 +918,12 @@ textarea:focus {
   }
   
   /* Efeito Hover no Botão */
-  #form button[type="submit"]:hover {
+  #formProjeto button[type="submit"]:hover {
     background-color: #0056b3;
   }
   
   /* Estilo para o botão de cancelar */
-  #form .button-container {
+  #formProjeto .button-container {
     display: flex;
     justify-content: center; /* Centraliza os botões horizontalmente */
     gap: 16px; /* Espaçamento entre os botões */
@@ -928,7 +932,7 @@ textarea:focus {
   }
   
   /* Botão de Cadastro */
-  #form button[type="submit"] {
+  #formProjeto button[type="submit"] {
     padding: 12px;
     background-color: #0BA200;
     color: white;
@@ -946,7 +950,7 @@ textarea:focus {
   }
   
   /* Botão de Cancelar */
-  #form button[type="button"] {
+  #formProjeto button[type="button"] {
     padding: 12px;
     background-color: white;
     color: red;
@@ -965,11 +969,11 @@ textarea:focus {
   }
   
   /* Efeito Hover nos botões */
-  #form button[type="submit"]:hover {
+  #formProjeto button[type="submit"]:hover {
     background-color: #098800;
   }
   
-  #form button[type="button"]:hover {
+  #formProjeto button[type="button"]:hover {
     background-color: rgb(255, 208, 208);
   }
   
@@ -1024,7 +1028,7 @@ textarea:focus {
   }
   
   /* Estilo do Modal */
-  #editModal {
+  #editProjetoModal {
     display: none; /* Inicialmente escondido */
     position: fixed;
     z-index: 1000; /* Garante que fique acima de outros elementos */
@@ -1037,7 +1041,7 @@ textarea:focus {
   }
   
   /* Conteúdo do Modal */
-  #editModal .modal-content {
+  #editProjetoModal .modal-content {
     background-color: white;
     margin: 5% auto; /* Centraliza verticalmente */
     padding: 20px;
@@ -1050,7 +1054,7 @@ textarea:focus {
   }
   
   /* Título do Modal */
-  #editModal h2 {
+  #editProjetoModal h2 {
     font-size: 1.5rem;
     font-weight: 600;
     margin-bottom: 20px;
@@ -1058,7 +1062,7 @@ textarea:focus {
   }
   
   /* Botão de fechar */
-  #editModal .close {
+  #editProjetoModal .close {
     color: #aaa;
     float: right;
     font-size: 28px;
@@ -1066,19 +1070,19 @@ textarea:focus {
     cursor: pointer;
   }
   
-  #editModal .close:hover,
-  #editModal .close:focus {
+  #editProjetoModal .close:hover,
+  #editProjetoModal .close:focus {
     color: black;
   }
   
   /* Formulário dentro do Modal */
-  #formEdit {
+  #formEditProjeto {
     display: flex;
     flex-direction: column;
     gap: 16px; /* Espaçamento entre os campos */
   }
   
-  #formEdit hr {
+  #formEditProjeto hr {
     border: 0;
     border-top: 2px solid #ccc; /* Cor e espessura da linha */
     margin: 16px 16px;
@@ -1086,20 +1090,21 @@ textarea:focus {
   }
   
   /* Campos do Formulário */
-  #formEdit .form-group {
+  #formEditProjeto .form-group {
     display: flex;
     flex-direction: column;
     gap: 2px; /* Espaçamento entre label e input */
   }
   
-  #formEdit label {
+  #formEditProjeto label {
     font-weight: 600;
     font-size: 16px;
     color: black;
+    text-align: left;
   }
   
-  #formEdit input,
-  #formEdit select {
+  #formEditProjeto input,
+  #formEditProjeto select {
     padding: 10px;
     font-size: 14px;
     border: 1.5px solid black;
@@ -1109,22 +1114,22 @@ textarea:focus {
     width: 100%;
   }
   
-  #formEdit input:focus,
-  #formEdit select:focus {
+  #formEditProjeto input:focus,
+  #formEditProjeto select:focus {
     border-color: #007bff;
     box-shadow: 0 0 6px rgba(0, 123, 255, 0.2);
   }
   
   /* Botões do Formulário */
-  #formEdit .button-container {
+  #formEditProjeto .button-container {
     display: flex;
-    justify-content: center;
-    gap: 16px;
+    justify-content: space-between; /* Alinha os botões lado a lado */
+    gap: 16px; /* Espaçamento entre os botões */
     margin-top: 20px;
-  }
-  
-  #formEdit button[type="submit"],
-  #formEdit button[type="button"] {
+}
+
+#formEditProjeto button[type="submit"],
+#formEditProjeto button[type="button"] {
     padding: 12px;
     font-size: 14px;
     font-weight: 600;
@@ -1132,31 +1137,31 @@ textarea:focus {
     border-radius: 8px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    width: 48%;
-    height: 45px;
+    width: 48%; /* Largura dos botões */
+    height: 45px; /* Altura dos botões */
     display: flex;
     align-items: center;
     justify-content: center;
-  }
-  
-  #formEdit button[type="submit"] {
+}
+
+#formEditProjeto button[type="submit"] {
     background-color: #0BA200;
     color: white;
-  }
-  
-  #formEdit button[type="submit"]:hover {
+}
+
+#formEditProjeto button[type="submit"]:hover {
     background-color: #098800;
-  }
-  
-  #formEdit button[type="button"] {
+}
+
+#formEditProjeto button[type="button"] {
     background-color: white;
     color: red;
     border: 1px solid red;
-  }
-  
-  #formEdit button[type="button"]:hover {
+}
+
+#formEditProjeto button[type="button"]:hover {
     background-color: rgb(255, 208, 208);
-  }
+}
   
   /* Estilo do modal de confirmação */
   #confirmModal {
@@ -1453,4 +1458,3 @@ textarea:focus {
     }
   
   }
-  

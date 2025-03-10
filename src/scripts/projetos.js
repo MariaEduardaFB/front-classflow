@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const token = localStorage.getItem("token");
 
     if (!token) {
-        alert("Você precisa fazer login.");
+        showCustomAlert("Você precisa fazer login.", "error");
         window.location.href = "./login.html";
         return;
     }
@@ -77,7 +77,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         `;
     } catch (error) {
         console.error("Erro ao carregar informações:", error);
-        alert("Erro ao carregar informações. Faça login novamente.");
+        showCustomAlert("Erro ao carregar informações. Faça login novamente.", "error");
         localStorage.removeItem("token");
         window.location.href = "./login.html";
     }
@@ -90,6 +90,15 @@ document.addEventListener("DOMContentLoaded", async () => {
     const modal = document.getElementById("modal");
     const menuModal = document.getElementById("menuModal");
     const editModal = document.getElementById("editModal");
+    const btnEditar = document.getElementById("btnEditar");
+    const btnExcluir = document.getElementById("btnExcluir");
+    const closeEditModal = document.getElementById("closeEditModal");
+    const cancelEdit = document.getElementById("cancelEdit");
+    const formEditProjeto = document.getElementById("formEditProjeto");
+    const confirmModal = document.getElementById("confirmModal");
+    const confirmDelete = document.getElementById("confirmDelete");
+    const cancelDelete = document.getElementById("cancelDelete");
+    const cancelarBtn = document.getElementById("cancelarBtn");
     let projetoSelecionado = null;
     let projetos = [];
 
@@ -97,6 +106,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     modal.style.display = "none";
     menuModal.style.display = "none";
     editModal.style.display = "none";
+    confirmModal.style.display = "none";
 
     async function cadastrarProjeto() {
         const titulo = document.getElementById("titulo").value;
@@ -106,7 +116,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         const arquivoInput = document.getElementById("arquivo");
     
         if (!arquivoInput.files.length) {
-            alert("Por favor, selecione um arquivo.");
+            showCustomAlert("Por favor, selecione um arquivo.", "error");
             return;
         }
     
@@ -129,15 +139,17 @@ document.addEventListener("DOMContentLoaded", async () => {
             const data = await response.json();
     
             if (response.ok) {
-                alert("Projeto cadastrado com sucesso!");
+                showCustomAlert("Projeto cadastrado com sucesso!", "success");
                 console.log(data);
+                formProjeto.reset(); // Limpa o formulário de cadastro
+                modal.style.display = "none"; // Fecha o modal de cadastro
                 carregarProjetos(); // Recarrega a lista de projetos
             } else {
                 throw new Error(data.error || "Erro desconhecido");
             }
         } catch (error) {
             console.error("Erro ao cadastrar projeto:", error);
-            alert(`Erro ao cadastrar projeto: ${error.message}`);
+            showCustomAlert(`Erro ao cadastrar projeto: ${error.message}`, "error");
         }
     }
 
@@ -186,7 +198,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                         <img src="../assets/icons/projetos-icon.png" alt="Ícone do projeto" class="projeto-icon">
                         <div class="projeto-info">
                             <span class="titulo">${projeto.titulo}</span>
-                            <span class="notas">COD: ${projeto.notas}</span>
+                            <span class="notas">Nota: ${projeto.notas}</span>
                             <p class="descricao">${projeto.descricao}</p>
                         </div>
                         <div class="projeto-options" data-id="${projeto.id}">
@@ -243,40 +255,182 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
 
     // Função para excluir um projeto
-async function excluirProjeto(projetoId) {
-    const token = localStorage.getItem('token'); // Assume que o token JWT está armazenado no localStorage
-  
-    if (!token) {
-      alert("Você precisa estar logado para excluir um projeto!");
-      return;
+    async function excluirProjeto(projetoId) {
+        const token = localStorage.getItem('token'); // Assume que o token JWT está armazenado no localStorage
+    
+        if (!token) {
+            showCustomAlert("Você precisa estar logado para excluir um projeto!", "error");
+            return;
+        }
+    
+        try {
+            const response = await fetch(`http://localhost:3000/api/projetos/${projetoId}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`, // Adiciona o token de autorização no cabeçalho
+                },
+            });
+    
+            if (!response.ok) {
+                throw new Error('Erro ao excluir o projeto');
+            }
+    
+            const data = await response.json();
+            showCustomAlert(data.message, "success"); // Exibe mensagem de sucesso
+            // Atualizar a lista de projetos ou redirecionar para a página inicial
+            carregarProjetos(); // Chame sua função para carregar os projetos após a exclusão
+        } catch (error) {
+            console.error('Erro ao excluir projeto:', error);
+            showCustomAlert('Erro ao excluir o projeto!', "error");
+        }
     }
-  
-    try {
-      const response = await fetch(`/projetos/${projetoId}`, {
-        method: 'DELETE',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`, // Adiciona o token de autorização no cabeçalho
-        },
-      });
-  
-      if (!response.ok) {
-        throw new Error('Erro ao excluir o projeto');
-      }
-  
-      const data = await response.json();
-      alert(data.message); // Exibe mensagem de sucesso
-      // Atualizar a lista de projetos ou redirecionar para a página inicial
-      carregarProjetos(); // Chame sua função para carregar os projetos após a exclusão
-    } catch (error) {
-      console.error('Erro ao excluir projeto:', error);
-      alert('Erro ao excluir o projeto!');
+
+    // Função para abrir o modal de edição e preencher os dados do projeto
+    if (btnEditar) {
+        btnEditar.addEventListener("click", () => {
+            if (projetoSelecionado) {
+                // Encontra o projeto selecionado na lista de projetos
+                const projeto = projetos.find(p => p.id === projetoSelecionado);
+
+                if (projeto) {
+                    // Preenche o modal de edição com os dados do projeto
+                    document.getElementById("editTitulo").value = projeto.titulo;
+                    document.getElementById("editDescricao").value = projeto.descricao;
+                    document.getElementById("editNotas").value = projeto.notas;
+                    document.getElementById("editStatus").value = projeto.status;
+
+                    // Exibe o modal de edição
+                    editModal.style.display = "flex";
+                } else {
+                    console.error("Projeto não encontrado.");
+                }
+            } else {
+                console.error("Nenhum projeto selecionado.");
+            }
+
+            // Esconde o menu de opções
+            menuModal.style.display = "none";
+        });
+    } else {
+        console.error("Elemento btnEditar não encontrado.");
     }
-  }
 
-  // Função para abrir o modal de edição e preencher os dados do projeto
-// Função para abrir o modal de edição e preencher os dados do projeto
+    // Fechar o modal de edição
+    if (closeEditModal) {
+        closeEditModal.addEventListener("click", () => {
+            editModal.style.display = "none";
+            projetoSelecionado = null; // Reseta o estado
+        });
+    } else {
+        console.error("Elemento closeEditModal não encontrado.");
+    }
 
+    // Cancelar a edição
+    if (cancelEdit) {
+        cancelEdit.addEventListener("click", () => {
+            editModal.style.display = "none";
+            projetoSelecionado = null; // Reseta o estado
+        });
+    } else {
+        console.error("Elemento cancelEdit não encontrado.");
+    }
 
+    // Salvar a edição
+    if (formEditProjeto) {
+        formEditProjeto.addEventListener("submit", async (event) => {
+            event.preventDefault();
+
+            const titulo = document.getElementById("editTitulo").value.trim();
+            const descricao = document.getElementById("editDescricao").value.trim();
+            const notas = document.getElementById("editNotas").value.trim();
+            const status = document.getElementById("editStatus").value;
+
+            try {
+                const response = await fetch(`http://localhost:3000/api/projetos/${projetoSelecionado}`, {
+                    method: "PUT",
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: `Bearer ${token}`,
+                    },
+                    body: JSON.stringify({
+                        titulo,
+                        descricao,
+                        notas,
+                        status,
+                    }),
+                });
+
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    console.error("Erro ao editar projeto:", errorData);
+                    showCustomAlert(errorData.error || "Erro ao editar projeto.", "error");
+                    return;
+                }
+
+                showCustomAlert("Projeto editado com sucesso!", "success");
+                editModal.style.display = "none";
+                projetoSelecionado = null; // Reseta o estado
+                await carregarProjetos(); // Atualiza a lista de projetos
+            } catch (error) {
+                console.error("Erro ao editar projeto:", error);
+                showCustomAlert("Erro ao editar projeto.", "error");
+            }
+        });
+    } else {
+        console.error("Elemento formEditProjeto não encontrado.");
+    }
+
+    // Função para abrir o modal de confirmação de exclusão
+    if (btnExcluir) {
+        btnExcluir.addEventListener("click", () => {
+            if (projetoSelecionado) {
+                confirmModal.style.display = "flex";
+            } else {
+                console.error("Nenhum projeto selecionado.");
+            }
+
+            // Esconde o menu de opções
+            menuModal.style.display = "none";
+        });
+    } else {
+        console.error("Elemento btnExcluir não encontrado.");
+    }
+
+    // Confirmar exclusão do projeto
+    if (confirmDelete) {
+        confirmDelete.addEventListener("click", async () => {
+            if (projetoSelecionado) {
+                await excluirProjeto(projetoSelecionado);
+                confirmModal.style.display = "none";
+                projetoSelecionado = null; // Reseta o estado
+            } else {
+                console.error("Nenhum projeto selecionado.");
+            }
+        });
+    } else {
+        console.error("Elemento confirmDelete não encontrado.");
+    }
+
+    // Cancelar exclusão do projeto
+    if (cancelDelete) {
+        cancelDelete.addEventListener("click", () => {
+            confirmModal.style.display = "none";
+            projetoSelecionado = null; // Reseta o estado
+        });
+    } else {
+        console.error("Elemento cancelDelete não encontrado.");
+    }
+
+    // Fechar o modal de cadastro de projeto ao clicar no botão de cancelar
+    if (cancelarBtn) {
+        cancelarBtn.addEventListener("click", () => {
+            modal.style.display = "none";
+        });
+    } else {
+        console.error("Elemento cancelarBtn não encontrado.");
+    }
+
+    // Carregar os projetos ao iniciar a página
     carregarProjetos();
 });

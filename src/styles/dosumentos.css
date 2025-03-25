@@ -9,3 +9,31 @@ body {
     margin-top: -600px;
     margin-left: 250px;
 }
+
+/* Estilizar a lista de documentos */
+#listaDocumentos {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    list-style-type: none;
+    padding: 0;
+    width:100%; /* Ajuste a largura conforme necessário */
+    max-width: 800px; /* Ajuste a largura máxima conforme necessário */
+}
+
+/* Estilizar cada item da lista de documentos */
+#listaDocumentos li {
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px;
+    flex: 0 1 calc(50% - 20px); /* Dois itens por linha */
+    box-sizing: border-box;
+    display: flex; /* Para alinhar o ícone e o nome na mesma linha */
+    width: 200px;
+    height: 100px; /* Ajuste a largura conforme necessário */
+    font-size: large;
+    position: relative; /* Para posicionar o menu de opções */
+    
+}

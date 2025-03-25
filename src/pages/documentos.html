@@ -53,7 +53,37 @@
         </div>
     </div>
 
+    <!-- Modal de Edição de Documento -->
+    <div id="modalEdicao" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Editar Documento</h2>
+            <hr>
+            <form id="formEdicaoDocumento">
+                <div class="form-group">
+                    <label for="nomeEdicao">Nome do Documento:</label>
+                    <input type="text" id="nomeEdicao" required>
+                </div>
+                <!-- Campo para upload de arquivo -->
+                <div class="form-group">
+                    <label for="arquivoEdicao">Upload de Arquivo:</label>
+                    <input type="file" id="arquivoEdicao" name="arquivoEdicao" accept=".jpg, .jpeg, .png, .pdf" />
+                </div>
+                <div class="button-container">
+                    <button type="submit" class="salvar">Salvar</button>
+                    <button type="button" id="cancelarEdicaoBtn" class="cancelar">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
     
+    <!-- Alerta Personalizado -->
+    <div id="customAlert" class="custom-alert">
+        <div class="alert-content">
+            <span id="alertMessage"></span>
+            <button id="closeAlert">&times;</button>
+        </div>
+    </div>
     
     <script src="../scripts/documentos.js" defer></script>
 </body>

@@ -51,3 +51,146 @@ body {
     font-weight: bold;
     margin-bottom: 10px;
 }
+
+/* Estilizar os links */
+.documento-content a {
+    margin: 5px 0;
+    text-decoration: none;
+    color: #007bff;
+}
+
+.documento-content a:hover {
+    text-decoration: underline;
+}
+
+.documento-actions {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    display: flex;
+    gap: 10px; /* Espaço entre os ícones */
+}
+
+.documento-actions a {
+    color: #007bff;
+    font-size: 20px; /* Ajuste o tamanho conforme necessário */
+}
+
+.documento-actions a:hover {
+    color: #0056b3;
+}
+
+.documento-icon {
+    width: 20px; /* Ajuste o tamanho conforme necessário */
+    height: 20px; /* Ajuste o tamanho conforme necessário */
+    margin-right: 10px; /* Espaço entre o ícone e o nome */
+}
+
+/* Estilizar o ícone do menu de opções */
+.options-icon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+}
+
+/* Estilizar o menu de opções */
+.options-menu {
+    display: none;
+    position: absolute;
+    top: 30px;
+    right: 10px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.options-menu a {
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    color: #333;
+}
+
+.options-menu a:hover {
+    background-color: #f9f9f9;
+}
+
+/* Estilizar o modal */
+.modal {
+    display: none; /* Escondido por padrão */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+/* Estilizar o conteúdo do modal */
+.modal-content {
+    background-color: #fff;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    height: 45%;
+    max-width: 500px;
+    border-radius: 5px;
+}
+
+/* Estilizar o botão de fechar */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Estilizar os botões */
+.button-container {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.button-container button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.button-container .salvar {
+    padding: 12px;
+  background-color: #0BA200;
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 48%; /* Largura dos botões */
+  height: 45px; /* Garantindo que a altura é a mesma */
+  display: flex;
+  align-items: center; /* Centraliza verticalmente o texto */
+  justify-content: center; /* Centraliza o texto horizontalmente */
+}
+
+
+.button-container .salvar:hover {
+    background-color: #0056b3;
+}

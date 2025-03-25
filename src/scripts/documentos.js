@@ -13,7 +13,11 @@ document.addEventListener("DOMContentLoaded", async () => {
         const alertMessage = document.getElementById("alertMessage");
 
         alertMessage.textContent = message;
+<<<<<<< HEAD
         customAlert.className = `custom-alert ${type}`;
+=======
+        customAlert.className = custom-alert ${type};
+>>>>>>> 778c750cfb32e17b41b1d1d9e00278a729c82fcd
         customAlert.style.display = "flex";
 
         setTimeout(() => {
@@ -29,7 +33,11 @@ document.addEventListener("DOMContentLoaded", async () => {
     let alunoId = null; // Variável para armazenar o ID do aluno
     try {
         const response = await fetch("http://localhost:3000/api/alunos/perfil", {
+<<<<<<< HEAD
             headers: { Authorization: `Bearer ${token}` },
+=======
+            headers: { Authorization: Bearer ${token} },
+>>>>>>> 778c750cfb32e17b41b1d1d9e00278a729c82fcd
         });
 
         if (!response.ok) {
@@ -91,7 +99,11 @@ document.addEventListener("DOMContentLoaded", async () => {
             const response = await fetch("http://localhost:3000/api/documentos", {
                 method: "POST",
                 headers: {
+<<<<<<< HEAD
                     Authorization: `Bearer ${token}`, // Token enviado no cabeçalho
+=======
+                    Authorization: Bearer ${token}, // Token enviado no cabeçalho
+>>>>>>> 778c750cfb32e17b41b1d1d9e00278a729c82fcd
                 },
                 body: formData, // Envia os dados como FormData
             });
@@ -109,7 +121,11 @@ document.addEventListener("DOMContentLoaded", async () => {
             }
         } catch (error) {
             console.error("Erro ao cadastrar documento:", error);
+<<<<<<< HEAD
             showCustomAlert(`Erro ao cadastrar documento: ${error.message}`, "error");
+=======
+            showCustomAlert(Erro ao cadastrar documento: ${error.message}, "error");
+>>>>>>> 778c750cfb32e17b41b1d1d9e00278a729c82fcd
         }
     }
 
@@ -124,10 +140,17 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
 
         try {
+<<<<<<< HEAD
             const response = await fetch(`http://localhost:3000/api/documentos/${documentoIdEdicao}`, {
                 method: "PUT",
                 headers: {
                     Authorization: `Bearer ${token}`, // Token enviado no cabeçalho
+=======
+            const response = await fetch(http://localhost:3000/api/documentos/${documentoIdEdicao}, {
+                method: "PUT",
+                headers: {
+                    Authorization: Bearer ${token}, // Token enviado no cabeçalho
+>>>>>>> 778c750cfb32e17b41b1d1d9e00278a729c82fcd
                 },
                 body: formData, // Envia os dados como FormData
             });
@@ -145,16 +168,27 @@ document.addEventListener("DOMContentLoaded", async () => {
             }
         } catch (error) {
             console.error("Erro ao editar documento:", error);
+<<<<<<< HEAD
             showCustomAlert(`Erro ao editar documento: ${error.message}`, "error");
+=======
+            showCustomAlert(Erro ao editar documento: ${error.message}, "error");
+>>>>>>> 778c750cfb32e17b41b1d1d9e00278a729c82fcd
         }
     }
 
     async function excluirDocumento(documentoId) {
         try {
+<<<<<<< HEAD
             const response = await fetch(`http://localhost:3000/api/documentos/${documentoId}`, {
                 method: "DELETE",
                 headers: {
                     Authorization: `Bearer ${token}`, // Token enviado no cabeçalho
+=======
+            const response = await fetch(http://localhost:3000/api/documentos/${documentoId}, {
+                method: "DELETE",
+                headers: {
+                    Authorization: Bearer ${token}, // Token enviado no cabeçalho
+>>>>>>> 778c750cfb32e17b41b1d1d9e00278a729c82fcd
                 },
             });
 
@@ -169,7 +203,11 @@ document.addEventListener("DOMContentLoaded", async () => {
             }
         } catch (error) {
             console.error("Erro ao excluir documento:", error);
+<<<<<<< HEAD
             showCustomAlert(`Erro ao excluir documento: ${error.message}`, "error");
+=======
+            showCustomAlert(Erro ao excluir documento: ${error.message}, "error");
+>>>>>>> 778c750cfb32e17b41b1d1d9e00278a729c82fcd
         }
     }
 
@@ -177,7 +215,11 @@ document.addEventListener("DOMContentLoaded", async () => {
     async function carregarDocumentos() {
         try {
             const response = await fetch("http://localhost:3000/api/documentos", {
+<<<<<<< HEAD
                 headers: { Authorization: `Bearer ${token}` },
+=======
+                headers: { Authorization: Bearer ${token} },
+>>>>>>> 778c750cfb32e17b41b1d1d9e00278a729c82fcd
             });
 
             if (!response.ok) {
@@ -199,7 +241,11 @@ document.addEventListener("DOMContentLoaded", async () => {
                 const li = document.createElement("li");
 
                 // Verifique se a URL do documento está definida
+<<<<<<< HEAD
                 const documentoUrl = documento.url ? documento.url : `http://localhost:3000/uploads/${documento.src}`;
+=======
+                const documentoUrl = documento.url ? documento.url : http://localhost:3000/uploads/${documento.src};
+>>>>>>> 778c750cfb32e17b41b1d1d9e00278a729c82fcd
 
                 li.innerHTML = `
                     <img src="../assets/icons/note-2.png" class="documento-icon" alt="Ícone do Documento">
@@ -256,7 +302,11 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
     }
 
+<<<<<<< HEAD
     // Fechar o modal de cadastro de documento
+=======
+// Fechar o modal de cadastro de documento
+>>>>>>> 778c750cfb32e17b41b1d1d9e00278a729c82fcd
     btnAbrirModal.addEventListener("click", () => {
         modal.style.display = "flex";
     });
@@ -294,4 +344,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     // Carregar os documentos ao iniciar a página
     carregarDocumentos();
+<<<<<<< HEAD
 });
+=======
+});
+>>>>>>> 778c750cfb32e17b41b1d1d9e00278a729c82fcd

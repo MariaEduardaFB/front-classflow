@@ -1,15 +1,60 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="../scripts/loadMenu.js" defer></script>
     <link rel="stylesheet" href="../styles/settings.css">
     <link rel="stylesheet" href="../styles/disciplinas.css">
+    <link rel="stylesheet" href="../styles/documentos.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <title>Documentos</title>
 </head>
 <body>
     <div id="sidebar-container"></div>
+
+    <header id="main-content">
+        <!-- O conteúdo do aluno será inserido aqui -->
+        <h1>Oi, [Nome do Aluno]!</h1>
+        <p>Vamos gerenciar seus documentos?</p>
+    </header>
     
+    <main>
+        <div id="documentosContainer">
+            <h2>Meus Documentos</h2>
+            <div class="documentos-header">
+                <button id="btnAbrirModal">+ Adicionar Documento</button>
+            </div>
+            <ul id="listaDocumentos"></ul>
+        </div>
+    </main>
+    
+    <!-- Modal de Cadastro de Documento -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Cadastrar Novo Documento</h2>
+            <hr>
+            <form id="formDocumento">
+                <div class="form-group">
+                    <label for="nome">Nome do Documento:</label>
+                    <input type="text" id="nome" required>
+                </div>
+                <!-- Campo para upload de arquivo -->
+                <div class="form-group">
+                    <label for="arquivo">Upload de Arquivo:</label>
+                    <input type="file" id="arquivo" name="arquivo" accept=".jpg, .jpeg, .png, .pdf" />
+                </div>
+                <div class="button-container">
+                    <button type="submit" class="salvar">Cadastrar</button>
+                    <button type="button" id="cancelarBtn" class="cancelar">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    
+    
+    <script src="../scripts/documentos.js" defer></script>
 </body>
 </html>

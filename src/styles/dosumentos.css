@@ -37,3 +37,17 @@ body {
     position: relative; /* Para posicionar o menu de opções */
     
 }
+
+/* Estilizar o conteúdo do documento */
+.documento-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Alinhar o conteúdo à esquerda */
+    flex-grow: 1; /* Alinhar o conteúdo à esquerda */
+}
+
+/* Estilizar o nome do documento */
+.documento-content .nome {
+    font-weight: bold;
+    margin-bottom: 10px;
+}

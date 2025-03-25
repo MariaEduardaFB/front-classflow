@@ -613,6 +613,7 @@ textarea:focus {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     
     
+    
   }
   
   /* Modal */
@@ -656,10 +657,10 @@ textarea:focus {
     position: relative; /* Define o contexto de posicionamento para os elementos filhos */
     display: flex;
     align-items: center;
-    padding: 10px;
+    padding: 20px;
     background-color: white;
     border-radius: 5px;
-    
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     margin-bottom: 10px;
   }
   

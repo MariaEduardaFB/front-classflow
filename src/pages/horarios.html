@@ -6,10 +6,112 @@
     <script src="../scripts/loadMenu.js" defer></script>
     <link rel="stylesheet" href="../styles/settings.css">
     <link rel="stylesheet" href="../styles/disciplinas.css">
+    <link rel="stylesheet" href="../styles/horarios.css">
     <title>Horários</title>
 </head>
 <body>
     <div id="sidebar-container"></div>
+
+    <header id="main-content">
+        <!-- O conteúdo do aluno será inserido aqui -->
+    </header>
     
+    <main>
+        <!-- Contêiner para o título e o botão -->
+        <div id="horariosHeader">
+            <h2>Meus Horários</h2>
+            <button id="btnAbrirModalHorario">+ Adicionar Horário</button>
+        </div>
+
+        <!-- Contêiner para a listagem de horários -->
+        <div id="horariosContainer">
+            <!-- A listagem de horários será inserida aqui pelo JavaScript -->
+        </div>
+    </main>
+
+    <!-- Modal de Cadastro de Horário -->
+    <div id="modalHorario" class="modal horarios-modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Cadastrar Novo Horário</h2>
+            <hr>
+            <form id="formHorario">
+                <div class="form-group">
+                    <label for="disciplina">Disciplina:</label>
+                    <select id="disciplina" required>
+                        <option value="" disabled selected>Selecione uma disciplina</option>
+                        <!-- As opções serão inseridas aqui dinamicamente -->
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="diaSemana">Dia da Semana:</label>
+                    <input type="text" id="diaSemana" required>
+                </div>
+                <div class="form-group">
+                    <label for="hInicio">Hora de Início:</label>
+                    <input type="time" id="hInicio" required>
+                </div>
+                <div class="form-group">
+                    <label for="hFim">Hora de Fim:</label>
+                    <input type="time" id="hFim" required>
+                </div>
+                <div class="form-group">
+                    <label for="cargaHoraria">Carga Horária:</label>
+                    <input type="number" id="cargaHoraria" required>
+                </div>
+                <div class="button-container">
+                    <button type="submit" class="salvar">Cadastrar</button>
+                    <button type="button" id="cancelarHorarioBtn" class="cancelar">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal de Edição de Horário -->
+    <div id="modalEdicao" class="modal horarios-modal">
+        <div class="modal-content">
+            <span class="close" id="cancelarEdicao">&times;</span>
+            <h2>Editar Horário</h2>
+            <hr>
+            <form id="formEdicao">
+                <div class="form-group">
+                    <label for="editarDisciplina">Disciplina:</label>
+                    <select id="editarDisciplina" required>
+                        <option value="" disabled selected>Selecione uma disciplina</option>
+                        <!-- As opções serão inseridas aqui dinamicamente -->
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="editarDiaSemana">Dia da Semana:</label>
+                    <input type="text" id="editarDiaSemana" required>
+                </div>
+                <div class="form-group">
+                    <label for="editarHInicio">Hora de Início:</label>
+                    <input type="time" id="editarHInicio" required>
+                </div>
+                <div class="form-group">
+                    <label for="editarHFim">Hora de Fim:</label>
+                    <input type="time" id="editarHFim" required>
+                </div>
+                <div class="form-group">
+                    <label for="editarCargaHoraria">Carga Horária:</label>
+                    <input type="number" id="editarCargaHoraria" required>
+                </div>
+                <div class="button-container">
+                    <button type="button" id="salvarEdicao" class="salvar">Salvar</button>
+                    <button type="button" id="cancelarEdicaoBtn" class="cancelar">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="customAlert" class="custom-alert">
+        <span id="alertMessage"></span>
+        <button id="closeAlert" class="close-alert">&times;</button>
+    </div>
+
+    
+    
+    <script src="../scripts/horarios.js" defer></script>
 </body>
 </html>

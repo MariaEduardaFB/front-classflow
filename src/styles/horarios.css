@@ -1,0 +1,474 @@
+
+#horariosContainer {
+    display: grid; /* Define o layout como grid */
+    grid-template-columns: repeat(4, 1fr); /* Define 5 colunas fixas */
+    gap: 15px; /* Espaçamento entre os itens */
+    padding: 20px; /* Espaçamento interno */
+    justify-content: center; /* Centraliza os itens horizontalmente */
+    align-items: start; /* Alinha os itens ao topo */
+    margin-left: 10rem;
+}
+
+/* Estilizar o título dos horários */
+#horariosContainer h2 {
+    margin-top: 10px;
+    color: #333;
+    background-color: aqua;
+}
+
+.h2h{
+    background-color: aquamarine;
+}
+
+/* Estilizar cada item de horário */
+.horario-item {
+    background-color: #f9f9f9; /* Fundo claro */
+    border: 1px solid #ddd; /* Borda leve */
+    border-radius: 8px; /* Bordas arredondadas */
+    padding: 15px; /* Espaçamento interno */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra leve */
+    text-align: left; /* Alinha o conteúdo à esquerda */
+    transition: transform 0.2s ease, box-shadow 0.2s ease; /* Animação ao passar o mouse */
+
+}
+
+.horario-item:hover {
+    transform: scale(1.02); /* Leve aumento */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Sombra mais forte */
+}
+
+/* Estilizar o título da disciplina */
+.horario-item h3 {
+    margin: 0 0 10px 0;
+    color: #007bff;
+}
+
+/* Estilizar os detalhes do horário */
+.horario-item p {
+    margin: 5px 0;
+    color: #0C1E33;
+} /* Estilizar o modal */
+.modal {
+    display: none; /* Escondido por padrão */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+/* Estilizar o conteúdo do modal */
+.modal-content {
+    background-color: #fff;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 500px;
+    border-radius: 5px;
+}
+
+/* Estilizar o botão de fechar */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Estilizar os inputs do formulário */
+.form-group input[type="text"],
+.form-group input[type="time"] {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0 10px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+/* Estilizar os botões */
+.button-container {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.button-container button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.button-container .salvar {
+    background-color: #007bff;
+    color: white;
+}
+
+.button-container .salvar:hover {
+    background-color: #0056b3;
+}
+
+.button-container .cancelar {
+    background-color: #6c757d;
+    color: white;
+}
+
+.button-container .cancelar:hover {
+    background-color: #5a6268;
+}
+
+/* Estilizar o contêiner do título e botão */
+#horariosHeader {
+    display: flex;
+    flex-direction: column; /* Alinha os itens verticalmente */
+    align-items: flex-start;
+    margin-bottom: 15px; /* Espaçamento entre o título e a listagem */
+    padding: 10px;
+    gap:10px;
+    border-radius: 5px;
+    margin-top: -38rem;
+    margin-left: 10rem;
+    position: relative;
+    display: flex; /* Ativa o Flexbox */
+    justify-content: space-between; /* Espaça os itens: título à esquerda, ícone à direita */
+    /* Alinha os itens verticalmente ao centro */
+    padding: 5px;
+}
+
+/* Estilizar o título */
+#horariosHeader h2 {
+    margin: 0;
+    font-size: 24px;
+    color:#0C1E33;
+    margin-left: 10px;
+}
+
+/* Estilizar o botão de adicionar horário */
+#horariosHeader button {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: white;
+    background-color: #007bff;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+#horariosHeader button:hover {
+    background-color: #0056b3;
+}
+
+/* Estilizar o contêiner de listagem de horários */
+
+
+/* Efeito ao passar o mouse */
+.horario-item:hover {
+    transform: scale(1.02); /* Leve aumento */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Sombra mais forte */
+}
+
+/* Estilo para o nome da disciplina */
+.disciplina-nome {
+    font-size: 18px; /* Tamanho maior */
+    font-weight: bold; /* Negrito */
+    color: #0C1E33; /* Cor escura */
+    margin-bottom: 10px; /* Espaçamento abaixo do título */
+    text-align: left; /* Alinha o texto à esquerda */
+}
+
+/* Estilo para a linha separadora */
+.horario-separador {
+    border: none;
+    border-top: 1px solid #ddd; /* Linha leve */
+    margin: 10px 0; /* Espaçamento acima e abaixo */
+}
+
+/* Estilo para os detalhes do horário */
+.horario-detalhes {
+    font-size: 14px; /* Tamanho menor */
+    color: #0C1E33; /* Cor mais clara */
+    margin: 5px 0; /* Espaçamento entre os detalhes */
+    text-align: left; /* Alinha o texto à esquerda */
+}
+
+/* Estilo para o dia da semana */
+.horario-dia {
+    font-size: 14px; /* Tamanho menor */
+    color: #0C1E33; /* Cor mais clara */
+    margin: 5px 0; /* Espaçamento entre os detalhes */
+    text-align: left; /* Alinha o texto à esquerda */
+}
+
+.carga-horaria {
+    font-size: 14px; /* Tamanho menor */
+    color: #0C1E33; /* Cor mais clara */
+    margin-bottom: 10px; /* Espaçamento abaixo da carga horária */
+    text-align: left; /* Alinha o texto à esquerda */
+}
+
+/* Estilo para a div que contém os detalhes do horário */
+.horario-info {
+    border: 1.5px solid #0C1E33; /* Borda leve */
+    border-radius: 5px; /* Bordas arredondadas */
+    padding: 2px; /* Espaçamento interno */
+    margin-top: 10px; /* Espaçamento acima */
+    background-color: #fdfdfd; /* Fundo claro */
+}
+
+/* Estilo para o texto dentro da div */
+.horario-info p {
+    margin: 5px 0; /* Espaçamento entre os parágrafos */
+    color: #0C1E33; /* Cor do texto */
+    font-size: 14px; /* Tamanho do texto */
+}
+
+/* Estilo para o ícone do menu */
+.menu-icon {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    right: 10px
+}
+
+/* Estilo para o menu de opções */
+.menu-opcoes {
+    display: none; /* Escondido por padrão */
+    position: absolute;
+    top: 25px; /* Posiciona abaixo do ícone */
+    right: 0;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+    padding: 5px;
+    width: 100px;
+}
+
+/* Estilo para os botões do menu */
+.menu-opcoes button {
+    display: block;
+    width: 100%;
+    padding: 5px;
+    border: none;
+    background: none;
+    text-align: left;
+    cursor: pointer;
+    font-size: 14px;
+    color: #333;
+}
+
+.menu-opcoes button:hover {
+    background-color: #f0f0f0;
+}
+
+/* Mostrar o menu quando ativo */
+.horario-header:hover .menu-opcoes {
+    display: block;
+}
+
+.horario-header {
+    display: flex; /* Ativa o Flexbox */
+    justify-content: space-between; /* Espaça o título e o ícone */
+    align-items: center; /* Alinha os itens verticalmente ao centro */
+    padding: 5px 0; /* Espaçamento interno opcional */
+}
+
+/* Estilo para o ícone do menu */
+.menu-icon {
+    width: 20px; /* Tamanho do ícone */
+    height: 20px;
+    cursor: pointer;
+}
+
+/* Estilo geral para os modais da página de horários */
+.horarios-modal {
+    display: none; /* Escondido por padrão */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 120%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5); /* Fundo escuro com transparência */
+}
+
+/* Estilo para o conteúdo dos modais */
+.horarios-modal .modal-content {
+    background-color: #fff;
+    margin: 10% auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    width: 90%;
+    max-width: 500px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    animation: fadeIn 0.3s ease-in-out;
+    
+}
+
+.horarios-modal .modal-content label {
+    font-size: 16px; /* Ajuste o tamanho da fonte aqui */
+    font-weight: bold; /* Deixe o texto em negrito, se necessário */
+    color: #0C1E33; /* Cor do texto */
+    margin-bottom: 5px; /* Espaçamento abaixo do rótulo */
+    display: block; /* Garante que o rótulo fique acima do input */
+}
+
+/* Animação de entrada */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Estilo para o botão de fechar */
+.horarios-modal .modal-content .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    
+}
+
+.horarios-modal .modal-content .close:hover {
+    color: #000;
+    
+}
+
+/* Estilo para os títulos dos modais */
+.horarios-modal .modal-content h2 {
+    margin-top: 0;
+    font-size: 24px;
+    color: #0C1E33;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+/* Estilo para os formulários dentro dos modais */
+.horarios-modal .modal-content form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    color: #000;
+    
+    
+}
+
+/* Estilo para os campos de entrada */
+.horarios-modal .modal-content input[type="text"],
+.horarios-modal .modal-content input[type="time"],
+.horarios-modal .modal-content input[type="number"],
+.horarios-modal .modal-content select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 4px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+/* Estilo para os botões dentro dos modais */
+.horarios-modal .modal-content .button-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.horarios-modal .modal-content .button-container button {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.horarios-modal .modal-content .button-container .salvar {
+    background-color: #0BA200;
+    color: white;
+}
+
+.horarios-modal .modal-content .button-container .salvar:hover {
+    background-color: #076f00;
+}
+
+.horarios-modal .modal-content .button-container .cancelar {
+    background-color: #fff;
+    color: red;
+    border: 1px solid red;
+}
+
+.horarios-modal .modal-content .button-container .cancelar:hover {
+    background-color:rgb(255, 167, 167);
+}
+
+/* Estilo para o contêiner de alertas personalizados */
+.custom-alert {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    display: none; /* Escondido por padrão */
+    padding: 15px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    color: white;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.custom-alert.success {
+    background-color: #28a745; /* Verde para sucesso */
+}
+
+.custom-alert.error {
+    background-color: #dc3545; /* Vermelho para erro */
+}
+
+.custom-alert.warning {
+    background-color: #ffc107; /* Amarelo para aviso */
+}
+
+.custom-alert .close-alert {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+

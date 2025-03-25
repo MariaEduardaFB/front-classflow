@@ -255,3 +255,43 @@ document.addEventListener("DOMContentLoaded", async () => {
             listaDocumentos.innerHTML = "<p>Cadastre seus documentos para visualizá-los aqui.</p>";
         }
     }
+
+// Fechar o modal de cadastro de documento
+    btnAbrirModal.addEventListener("click", () => {
+        modal.style.display = "flex";
+    });
+
+    btnFecharModal.addEventListener("click", () => {
+        modal.style.display = "none";
+    });
+
+    // Fechar o modal de edição de documento
+    btnFecharModalEdicao.addEventListener("click", () => {
+        modalEdicao.style.display = "none";
+    });
+
+    // Salvar o documento quando o formulário for enviado
+    formDocumento.addEventListener("submit", (event) => {
+        event.preventDefault(); // Impede o envio padrão do formulário
+        cadastrarDocumento(); // Chama a função para cadastrar o documento
+    });
+
+    // Salvar as alterações do documento quando o formulário de edição for enviado
+    formEdicaoDocumento.addEventListener("submit", (event) => {
+        event.preventDefault(); // Impede o envio padrão do formulário
+        editarDocumento(); // Chama a função para editar o documento
+    });
+
+    // Fechar o modal de cadastro de documento ao clicar no botão de cancelar
+    cancelarBtn.addEventListener("click", () => {
+        modal.style.display = "none";
+    });
+
+    // Fechar o modal de edição de documento ao clicar no botão de cancelar
+    cancelarEdicaoBtn.addEventListener("click", () => {
+        modalEdicao.style.display = "none";
+    });
+
+    // Carregar os documentos ao iniciar a página
+    carregarDocumentos();
+});

@@ -194,3 +194,26 @@ body {
 .button-container .salvar:hover {
     background-color: #0056b3;
 }
+
+.button-container .cancelar {
+    padding: 12px;
+    background-color: white;
+    color: red;
+    font-size: 14px;
+    font-weight: 600;
+    border: 1px solid;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    /* margin-top: 1rem; */
+    width: 48%; /* Largura dos botões */
+    height: 45px;  /* Garantindo que a altura é a mesma */
+    display: flex;
+    align-items: center; /* Centraliza verticalmente o texto */
+    justify-content: center; /* Centraliza o texto horizontalmente */
+}
+
+.button-container .cancelar:hover {
+    background-color: #de4747;
+}
+

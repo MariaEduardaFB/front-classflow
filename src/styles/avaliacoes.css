@@ -1,16 +1,115 @@
 /* Estilo geral */
-body {
-    font-family: Arial, sans-serif;
+
+* {
     margin: 0;
     padding: 0;
-    background-color: #f9f9f9;
-}
+    box-sizing: border-box;
+  }
+  
+  /* Corpo da página */
+  body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f4f4f4;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+  }
+  
+  /* Menu lateral */
+  #sidebar {
+    width: 250px;
+    background-color: white;
+    color: #8E92BC;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Logo do sistema */
+  #logo-container {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  #logo {
+    width: 200px;
+    height: auto;
+  }
+  
+  /* Menu de navegação */
+  nav ul {
+    list-style-type: none;
+  }
+  
+  nav ul li {
+    margin: 10px 0;
+  }
+  
+  nav ul li a {
+    color: #8E92BC;
+    text-decoration: none;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-radius: 5px;
+    transition: 0.3s;
+  }
+  
+  nav ul li a img {
+    width: 24px;
+    height: 24px;
+    margin-right: 10px;
+  }
+  
+  nav ul li a:hover {
+    background-color: #F5F5F7;
+    color: black;
+    font-weight: bold;
+  }
+  
+  nav ul li a:hover img {
+    filter: brightness(0);
+  }
+  
+  /* Conteúdo principal */
+  #main-content {
+    margin-left: 250px;
+    padding: 20px;
+    width: calc(100% - 250px);
+    background-color: #F4F4F4;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centraliza horizontalmente */
+  }
+  
+  /* Cabeçalho com o nome do usuário */
+  #main-content h1 {
+    font-size: 32px;
+    margin-bottom: 10px;
+    color: #333;
+    align-self: center; /* Alinha o título à esquerda */
+  }
+  
 
 #main-content {
+    margin-left: 250px;
     padding: 20px;
-    text-align: center;
-    background-color: #0C1E33;
-    color: white;
+    width: calc(100% - 250px);
+    background-color: #F4F4F4;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: visible; /* Permite que o conteúdo transborde, se necessário */
+    min-height: 100vh;
+  
 }
 
 #main-content h1 {
@@ -23,12 +122,24 @@ body {
     font-size: 16px;
 }
 
+#avaliacoesContainer {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 colunas de largura igual */
+    gap: 15px; /* Espaço entre as avaliações */
+    padding: 20px;
+    width: 100%; /* Ajusta a largura ao contêiner pai */
+    margin-bottom: 20px; /* Espaço inferior */
+    overflow: visible; /* Permite que o conteúdo transborde */
+}
+
 /* Header e botão de adicionar */
 #avaliacoesHeader {
     display: flex;
     flex-direction: column; /* Coloca os elementos um abaixo do outro */
-    align-items: flex-start;
-    /* margin-left: -200px; Alinha os elementos à esquerda */
+    align-items: flex-start; /* Alinha os elementos à esquerda */
+    padding: 20px;
+    margin-top: -650px;
+    
    
 }
 
@@ -302,4 +413,49 @@ body {
     justify-content: space-between;
     align-items: center;
     margin-bottom: 10px;
+}
+
+.menu-modal {
+  display: none; /* Inicialmente escondido */
+  position: absolute; /* Posicionamento absoluto */
+  background-color: white; /* Fundo branco */
+  border: 1px solid #ccc; /* Borda sutil */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra */
+  z-index: 1000; /* Garante que fique acima de outros elementos */
+  padding: 5px; /* Espaçamento interno */
+  border-radius: 5px; /* Bordas arredondadas */
+  
+}
+
+.menu-modal button {
+  display: block; /* Cada botão em uma linha */
+  width: 100%; /* Largura total */
+  padding: 8px 12px; /* Espaçamento interno */
+  text-align: left; /* Alinhamento do texto */
+  font-weight: bold;
+  border: none; /* Remove borda */
+  background-color: transparent; /* Fundo transparente */
+  cursor: pointer; /* Cursor de ponteiro */
+  color: black; /* Cor do texto */
+  font-size: small;
+}
+
+.menu-modal button:hover {
+    background-color: #f5f5f5; /* Efeito hover */
+    color: black; /* Mantém a cor do texto */
+    border: none;/* Efeito hover */
+}
+
+.modal {
+    display: none; /* Escondido por padrão */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

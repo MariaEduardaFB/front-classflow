@@ -15,6 +15,8 @@ body {
   flex-direction: column;
   align-items: center;
   min-height: 100vh;
+  position: relative;
+  justify-content: space-between;
 }
 
 /* Menu lateral */
@@ -30,6 +32,8 @@ body {
   display: flex;
   flex-direction: column;
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  
+  justify-content: space-between;
 }
 
 /* Logo do sistema */
@@ -1051,4 +1055,41 @@ nav ul li a:hover img {
   }
 
 }
+
+
+
+#logout-container {
+  margin-top: auto; /* Empurra o botão para o final */
+  padding: 10px;
+  text-align: center;
+}
+
+#logout-btn {
+  background-color: transparent;
+  color: #8E92BC;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+  width: 90%;
+  margin: auto;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-size: 18px;
+}
+
+#logout-btn:hover {
+  background-color: #F5F5F7;
+  color: black;
+  font-weight: bold;
+}
+
+/* Ícone fica preto no hover */
+#logout-btn:hover img {
+  filter: brightness(0);
+}
+
+
 

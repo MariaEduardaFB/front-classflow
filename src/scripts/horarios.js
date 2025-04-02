@@ -79,7 +79,8 @@ document.addEventListener("DOMContentLoaded", async () => {
                 throw new Error("Você ainda não possui nenhum horário cadastrado.");
             }
 
-            const horarios = await response.json(); // Guarda os horários retornados da API
+            const horarios = await response.json(); // Dados retornados pela API
+            console.log("Horários retornados pela API:", horarios); // Log para verificar os dados
 
             const horariosContainer = document.getElementById("horariosContainer");
 
@@ -91,29 +92,64 @@ document.addEventListener("DOMContentLoaded", async () => {
                 return;
             }
 
-            // Itera sobre os horários e cria os elementos HTML
-            horarios.forEach((horario) => {
-                const div = document.createElement("div");
-                div.className = "horario-item";
-                div.dataset.id = horario.id; // Certifique-se de que o ID está sendo atribuído aqui
-                div.innerHTML = `
-                    <div class="horario-header">
-                        <h3 class="disciplina-nome">${horario.Disciplina.nome}</h3>
-                        <img src="../assets/icons/Meatballs_menu.png" alt="Menu" class="menu-icon" />
-                        <div class="menu-opcoes">
-                            <button class="editar-horario">Editar</button>
-                            <button class="excluir-horario">Excluir</button>
-                        </div>
-                    </div>
-                    <p class="carga-horaria">Disciplina de ${horario.cargaHoraria} horas</p>
-                    <hr class="horario-separador">
-                    <div class="horario-info">
-                        <p class="horario-dia">Dia: ${horario.diaSemana}</p>
-                        <p class="horario-detalhes">${horario.hInicio} às ${horario.hFim}</p>
-                    </div>
-                `;
-                horariosContainer.appendChild(div); // Adiciona o novo horário ao contêiner
+            // Dias da semana em ordem
+            const diasSemana = ["Segunda", "Terça", "Quarta", "Quinta", "Sexta"];
+
+            // Cria a tabela
+            const tabela = document.createElement("table");
+            tabela.className = "tabela-horarios";
+
+            // Cria o cabeçalho da tabela
+            const thead = document.createElement("thead");
+            const headerRow = document.createElement("tr");
+            diasSemana.forEach((dia) => {
+                const th = document.createElement("th");
+                th.textContent = dia;
+                headerRow.appendChild(th);
             });
+            thead.appendChild(headerRow);
+            tabela.appendChild(thead);
+
+            // Cria o corpo da tabela
+            const tbody = document.createElement("tbody");
+            const maxHorariosPorDia = Math.max(
+                ...diasSemana.map((dia) =>
+                    horarios.filter((horario) => horario.diaSemana === dia).length
+                )
+            );
+
+            for (let i = 0; i < maxHorariosPorDia; i++) {
+                const row = document.createElement("tr");
+
+                diasSemana.forEach((dia) => {
+                    const horariosDoDia = horarios.filter(
+                        (horario) => horario.diaSemana === dia
+                    );
+
+                    const td = document.createElement("td");
+                    if (horariosDoDia[i]) {
+                        const horario = horariosDoDia[i];
+                        td.innerHTML = `
+                        <div class="horario-item" data-id="${horario.id}">
+                            <h3>${horario.Disciplina?.nome || "Disciplina não encontrada"}</h3>
+                            <p>${horario.hInicio} às ${horario.hFim}</p>
+                            <p>${horario.cargaHoraria} horas</p>
+                            <img src="../assets/icons/Meatballs_menu.png" alt="Menu" class="menu-icon" />
+                            <div class="menu-opcoes">
+                                <button class="editar-horario" data-id="${horario.id}">Editar</button>
+                                <button class="excluir-horario" data-id="${horario.id}">Excluir</button>
+                            </div>
+                        </div>
+                    `;
+                    }
+                    row.appendChild(td);
+                });
+
+                tbody.appendChild(row);
+            }
+
+            tabela.appendChild(tbody);
+            horariosContainer.appendChild(tabela);
         } catch (error) {
             console.error("Erro ao carregar horários:", error);
             const horariosContainer = document.getElementById("horariosContainer");
@@ -129,11 +165,11 @@ document.addEventListener("DOMContentLoaded", async () => {
                     method: "DELETE",
                     headers: { Authorization: `Bearer ${token}` },
                 });
-
+    
                 if (!response.ok) {
                     throw new Error("Erro ao excluir o horário.");
                 }
-
+    
                 showCustomAlert("Horário excluído com sucesso!");
                 carregarHorarios(); // Atualiza a lista de horários
             } catch (error) {
@@ -145,7 +181,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     // Função para editar um horário (exemplo básico)
     function editarHorario(horarioId) {
-        // Busca os dados do horário para edição
         fetch(`http://localhost:3000/api/horarios/${horarioId}`, {
             headers: { Authorization: `Bearer ${token}` },
         })
@@ -214,7 +249,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         const cargaHoraria = document.getElementById("cargaHoraria").value;
 
         if (!disciplina || !diaSemana || !hInicio || !hFim || !cargaHoraria) {
-            showCustomAlert("Todos os campos são obrigatórios!", "error");
+            alert("Todos os campos são obrigatórios!");
             return;
         }
 
@@ -241,13 +276,13 @@ document.addEventListener("DOMContentLoaded", async () => {
                 throw new Error(error.error || "Erro ao cadastrar horário.");
             }
 
-            showCustomAlert("Horário cadastrado com sucesso!", "success");
-            document.getElementById("formHorario").reset(); // Limpa o formulário
-            modalHorario.style.display = "none"; // Fecha o modal
-            carregarHorarios(); // Atualiza a lista de horários
+            alert("Horário cadastrado com sucesso!");
+            document.getElementById("formHorario").reset();
+            modalHorario.style.display = "none";
+            carregarHorarios();
         } catch (error) {
             console.error("Erro ao cadastrar horário:", error);
-            showCustomAlertalert(`Erro ao cadastrar horário: ${error.message}`);
+            alert(`Erro ao cadastrar horário: ${error.message}`);
         }
     }
 
@@ -279,10 +314,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
     });
 
-    
-
-    
-
     // Carregar os dados do aluno ao iniciar a página
     carregarDadosAluno();
 
@@ -306,15 +337,15 @@ document.addEventListener("DOMContentLoaded", async () => {
         const hInicioInput = document.getElementById("editarHInicio");
         const hFimInput = document.getElementById("editarHFim");
         const cargaHorariaInput = document.getElementById("editarCargaHoraria");
-    
+
         // Fecha todos os menus de opções
         document.querySelectorAll(".menu-opcoes").forEach((menu) => {
             menu.style.display = "none";
         });
-    
+
         // Limpa as opções existentes no campo de seleção
         disciplinaInput.innerHTML = '<option value="" disabled>Selecione uma disciplina</option>';
-    
+
         // Busca as disciplinas e preenche o campo de seleção
         fetch("http://localhost:3000/api/disciplinas", {
             headers: { Authorization: `Bearer ${token}` },
@@ -330,12 +361,12 @@ document.addEventListener("DOMContentLoaded", async () => {
                     const option = document.createElement("option");
                     option.value = disciplina.id;
                     option.textContent = disciplina.nome;
-    
+
                     // Seleciona a disciplina do horário atual
                     if (disciplina.id === horario.Disciplina.id) {
                         option.selected = true;
                     }
-    
+
                     disciplinaInput.appendChild(option);
                 });
             })
@@ -343,16 +374,16 @@ document.addEventListener("DOMContentLoaded", async () => {
                 console.error("Erro ao carregar disciplinas:", error);
                 alert("Erro ao carregar disciplinas. Tente novamente mais tarde.");
             });
-    
+
         // Preenche os campos do formulário com os dados do horário
         diaSemanaInput.value = horario.diaSemana;
         hInicioInput.value = horario.hInicio;
         hFimInput.value = horario.hFim;
         cargaHorariaInput.value = horario.cargaHoraria;
-    
+
         // Exibe o modal
         modalEdicao.style.display = "flex";
-    
+
         // Adiciona o evento de salvar as alterações
         const salvarEdicaoBtn = document.getElementById("salvarEdicao");
         salvarEdicaoBtn.onclick = async () => {
@@ -364,7 +395,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                     hFim: hFimInput.value,
                     cargaHoraria: cargaHorariaInput.value,
                 };
-    
+
                 const response = await fetch(`http://localhost:3000/api/horarios/${horario.id}`, {
                     method: "PUT",
                     headers: {
@@ -373,11 +404,11 @@ document.addEventListener("DOMContentLoaded", async () => {
                     },
                     body: JSON.stringify(formData),
                 });
-    
+
                 if (!response.ok) {
                     throw new Error("Erro ao editar o horário.");
                 }
-    
+
                 showCustomAlert("Horário editado com sucesso!", "success");
                 modalEdicao.style.display = "none"; // Fecha o modal
                 carregarHorarios(); // Atualiza a lista de horários
@@ -398,17 +429,50 @@ document.addEventListener("DOMContentLoaded", async () => {
     function showCustomAlert(message, type = "success") {
         const customAlert = document.getElementById("customAlert");
         const alertMessage = document.getElementById("alertMessage");
-    
+
         alertMessage.textContent = message;
         customAlert.className = `custom-alert ${type}`;
         customAlert.style.display = "flex";
-    
+
         setTimeout(() => {
             customAlert.style.display = "none";
         }, 3000);
-    
+
         document.getElementById("closeAlert").addEventListener("click", () => {
             customAlert.style.display = "none";
         });
     }
+
+    // Elementos do modal
+// Elementos do modal
+const confirmDeleteModal = document.getElementById("confirmDeleteModal");
+const confirmDeleteBtn = document.getElementById("confirmDelete");
+const cancelDeleteBtn = document.getElementById("cancelDelete");
+
+// Função para abrir o modal
+function abrirModalConfirmacao() {
+    confirmDeleteModal.style.display = "flex"; // Exibe o modal
+}
+
+// Função para fechar o modal
+function fecharModalConfirmacao() {
+    confirmDeleteModal.style.display = "none"; // Oculta o modal
+}
+
+// Evento para abrir o modal ao clicar no botão de exclusão
+document.getElementById("horariosContainer").addEventListener("click", (event) => {
+    if (event.target.classList.contains("excluir-horario")) {
+        abrirModalConfirmacao();
+    }
+});
+
+// Evento para fechar o modal ao clicar no botão "Não"
+cancelDeleteBtn.addEventListener("click", fecharModalConfirmacao);
+
+// Fechar o modal ao clicar fora do conteúdo
+window.addEventListener("click", (event) => {
+    if (event.target === confirmDeleteModal) {
+        fecharModalConfirmacao();
+    }
+});
 });

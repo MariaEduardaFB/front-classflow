@@ -14,6 +14,7 @@
     margin-top: 10px;
     color: #333;
     background-color: aqua;
+    
 }
 
 .h2h{
@@ -136,12 +137,12 @@
     display: flex;
     flex-direction: column; /* Alinha os itens verticalmente */
     align-items: flex-start;
-    margin-bottom: 15px; /* Espaçamento entre o título e a listagem */
+    margin-bottom: 5px; /* Espaçamento entre o título e a listagem */
     padding: 10px;
     gap:10px;
     border-radius: 5px;
     margin-top: -38rem;
-    margin-left: 10rem;
+    margin-left: 26rem;
     position: relative;
     display: flex; /* Ativa o Flexbox */
     justify-content: space-between; /* Espaça os itens: título à esquerda, ícone à direita */
@@ -472,3 +473,204 @@
     }
 }
 
+/* Estilo da tabela */
+.tabela-horarios {
+    width: 100%;
+    border-collapse: separate; /* Necessário para que o border-radius funcione */
+    border-spacing: 0; /* Remove o espaçamento entre as células */
+    margin-top: 10px;
+    margin-left: 250px;
+    
+}
+
+.tabela-horarios th,
+.tabela-horarios td {
+    border: 2px solid #ddd;
+    padding: 15px;
+    text-align: center;
+   
+}
+    
+/* Arredonda os cantos superiores da primeira linha */
+.tabela-horarios th:first-child {
+    border-top-left-radius: 10px;
+}
+
+.tabela-horarios th:last-child {
+    border-top-right-radius: 10px;
+}
+
+/* Arredonda os cantos inferiores da última linha */
+.tabela-horarios td:first-child:last-of-type {
+    border-bottom-left-radius: 10px;
+}
+
+.tabela-horarios td:last-child:last-of-type {
+    border-bottom-right-radius: 10px;
+}
+
+
+.tabela-horarios td {
+    width: 100px; /* Permite que a largura seja dinâmica */
+    max-width: 300px; /* Define um limite máximo para a largura */
+}
+
+.tabela-horarios th {
+    background-color: #f4f4f4;
+    font-weight: bolder;
+    color: #007bff;
+    font-size: larger;
+}
+
+.horario-item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+    position: relative
+}
+
+.horario-item h3 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.horario-item p {
+    margin: 0;
+    font-size: 14px;
+}
+
+.horario-item button {
+    margin-top: 5px;
+    padding: 5px 10px;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.horario-item .menu-icon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.horario-item .menu-opcoes {
+    display: none; /* Esconde o menu por padrão */
+    position: absolute;
+    top: 30px;
+    right: 10px;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    z-index: 10;
+}
+
+.horario-item .menu-opcoes button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    border: none;
+    background: none;
+    text-align: left;
+    cursor: pointer;
+}
+
+.horario-item .menu-opcoes button:hover {
+    background-color: #f4f4f4;
+}
+
+/* Estilo geral do modal */
+#confirmDeleteModal {
+    display: none; /* O modal estará oculto inicialmente */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    border-radius: 8px;
+    z-index: 1000;
+}
+
+/* Conteúdo do modal */
+#confirmDeleteModal .modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+    animation: fadeIn 0.3s ease-in-out; /* Animação de entrada */
+}
+
+/* Título do modal */
+#confirmDeleteModal .modal-content h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+/* Texto dentro do modal */
+#confirmDeleteModal .modal-content p {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+/* Área dos botões */
+#confirmDeleteModal .button-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+/* Botão de confirmar */
+#confirmDeleteModal .confirm-btn {
+    background-color: #dc3545; /* Vermelho */
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+#confirmDeleteModal .confirm-btn:hover {
+    background-color: #c82333; /* Vermelho mais escuro no hover */
+}
+
+/* Botão de cancelar */
+#confirmDeleteModal .cancel-btn {
+    background-color: #6c757d; /* Cinza */
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+#confirmDeleteModal .cancel-btn:hover {
+    background-color: #5a6268; /* Cinza mais escuro no hover */
+}
+
+/* Animação de entrada */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}

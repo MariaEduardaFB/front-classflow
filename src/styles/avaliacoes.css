@@ -246,23 +246,25 @@
     max-width: 400px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     text-align: center;
+    
 }
 
 .modal-content h2 {
     margin: 0 0 20px;
     font-size: 20px;
-    color: #333;
+    color: black;
 }
 
 .modal-content .form-group {
     margin-bottom: 15px;
     text-align: left;
+    
 }
 
 .modal-content .form-group label {
     display: block;
-    font-size: 14px;
-    color: #333;
+    font-size: 16px;
+    color: black;
     margin-bottom: 5px;
 }
 
@@ -270,7 +272,7 @@
 .modal-content .form-group select {
     width: 100%;
     padding: 8px;
-    border: 1px solid #ddd;
+    border: 1.5px solid black;
     border-radius: 5px;
     font-size: 14px;
 }
@@ -278,7 +280,7 @@
 .modal-content .button-container {
     display: flex;
     justify-content: space-between;
-    gap: 10px;
+    gap: 5px;
 }
 
 .modal-content .salvar {
@@ -296,17 +298,18 @@
 }
 
 .modal-content .cancelar {
-    background-color: #6c757d;
-    color: white;
-    border: none;
+    background-color: white;
+    color: red;
+    border: 1.5px solid red;
     padding: 10px 15px;
     border-radius: 5px;
     cursor: pointer;
     font-size: 14px;
+
 }
 
 .modal-content .cancelar:hover {
-    background-color: #5a6268;
+    background-color: rgb(255, 111, 111);
 }
 
 .modal-content .close {
@@ -324,12 +327,12 @@
 /* Modal de exclusão */
 .modal-content p {
     font-size: 16px;
-    color: #333;
+    color: black;
     margin-bottom: 20px;
 }
 
 .confirm-btn {
-    background-color: #dc3545;
+    background-color: #218838;
     color: white;
     border: none;
     padding: 10px 15px;
@@ -339,13 +342,13 @@
 }
 
 .confirm-btn:hover {
-    background-color: #c82333;
+    background-color: #186429;
 }
 
 .cancel-btn {
-    background-color: #6c757d;
-    color: white;
-    border: none;
+    background-color:white;
+    color: red;
+    border: 1.5px solid red;
     padding: 10px 15px;
     border-radius: 5px;
     cursor: pointer;
@@ -353,7 +356,7 @@
 }
 
 .cancel-btn:hover {
-    background-color: #5a6268;
+    background-color: rgb(255, 111, 111);
 }
 
 .avaliacao-meta {
@@ -459,3 +462,45 @@
     justify-content: center;
     align-items: center;
 }
+
+#modalEditarAvaliacao {
+    display: none; /* O modal estará oculto inicialmente */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    border-radius: 8px;
+    z-index: 1000;
+}
+
+#modalAvaliacao {
+    display: none; /* O modal estará oculto inicialmente */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    border-radius: 8px;
+    z-index: 1000;
+}
+
+#confirmDeleteModal {
+    display: none; /* O modal estará oculto inicialmente */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    border-radius: 8px;
+    z-index: 1000;
+}
+
+
+
